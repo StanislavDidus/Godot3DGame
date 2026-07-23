@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://csqcpmuorev6i"]
+
+[ext_resource type="Script" uid="uid://10aynj028npd" path="res://scenes/inventory_hud.gd" id="1_caulm"]
+
+[node name="inventory_hud" type="CanvasLayer" unique_id=2097994074 node_paths=PackedStringArray("slots")]
+script = ExtResource("1_caulm")
+slots = [NodePath("Slot1"), NodePath("Slot2"), NodePath("Slot3")]
+
+[node name="Slot1" type="Control" parent="." unique_id=84580739]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 306.0
+offset_top = 432.0
+offset_right = 444.0
+offset_bottom = 570.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Slot1" unique_id=1592385664]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.016080914, 0.016080914, 0.016080914, 0.53333336)
+
+[node name="TextureRect" type="TextureRect" parent="Slot1" unique_id=562915850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot2" type="Control" parent="." unique_id=1181276625]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 502.0
+offset_top = 432.0
+offset_right = 640.0
+offset_bottom = 570.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Slot2" unique_id=1283257576]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.016080914, 0.016080914, 0.016080914, 0.53333336)
+
+[node name="TextureRect" type="TextureRect" parent="Slot2" unique_id=194097950]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot3" type="Control" parent="." unique_id=430610064]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 693.0
+offset_top = 432.0
+offset_right = 831.0
+offset_bottom = 570.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Slot3" unique_id=452207135]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.016080914, 0.016080914, 0.016080914, 0.53333336)
+
+[node name="TextureRect" type="TextureRect" parent="Slot3" unique_id=4985968]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
