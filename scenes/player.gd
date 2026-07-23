@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var mouse_sensitivity: float = 0.1
 @export var crouch_offset: float = 0.3
 @export var crouch_speed: float = 0.5
+@export var gravity = 9.8
 
 @export_group("Camera shaking")
 @export var camera_shake_amplitude: float = 0.1
@@ -17,11 +18,13 @@ extends CharacterBody3D
 
 @export_group("UI")
 @export var interaction_label: Node
+@export var put_item_label: Node
 @export var inventory_ui: Node
 
 @export_group("Inventory")
 @export var inventory_size = 3
 var items: Array
+var active_item = -1
 
 enum PLAYER_STATE
 {
@@ -43,41 +46,66 @@ var player_current_state: PLAYER_STATE = PLAYER_STATE.IDLE
 
 var looking_at_item: bool = false
 
+
 var crouch_tween: Tween
 
-func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	camera_origin_position = $Camera.position
-	$Camera/RayCast3D.target_position.z = -interaction_distance
-	inventory_ui.hide()
-
 func _unhandled_input(event: InputEvent) -> void:
+
 	if event is InputEventMouseMotion:
 		twist_input -= event.screen_relative.x * mouse_sensitivity
 		pitch_input -= event.screen_relative.y * mouse_sensitivity
 		pitch_input = clamp(pitch_input, -85, 85)
 
-func _process(delta: float) -> void:
-	var current_q = basis.get_rotation_quaternion()
-	var twist_q = Quaternion(Vector3.UP, deg_to_rad(twist_input))
-	var pitch_q = Quaternion(Vector3.RIGHT, deg_to_rad(pitch_input))
-	var smoothed_q = current_q.slerp(twist_q * pitch_q, delta * 10.0)
-	basis = Basis(smoothed_q)
-	
-	if Input.is_action_just_pressed("open_inventory"):
-		inventory_ui.show()
-		$OpenInventoryTimer.start()
-	
-	interact_with_all_items()
-	
-	looking_at_item = false
-
-func _physics_process(delta: float) -> void:
-	timer += delta * camera_shake_speed
-	slow_timer += delta * camera_shake_speed * 0.5
 		
-	on_update_state(player_current_state, delta)
-
+func is_moving():
+	if Input.is_action_pressed("move_left")	or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_forward")	or Input.is_action_pressed("move_back"):
+		return true
+	return false
+	
+func open_inventory_slot():
+	var equipped = false
+	if Input.is_action_just_pressed("open_inventory_slot_1") and items.size() > 0:
+		if active_item == 0:
+			active_item = -1
+		else:
+			active_item = 0
+		equipped = true
+	if Input.is_action_just_pressed("open_inventory_slot_2") and items.size() > 1:
+		if active_item == 1:
+			active_item = -1
+		else:
+			active_item = 1
+		equipped = true
+	if Input.is_action_just_pressed("open_inventory_slot_3") and items.size() > 2:
+		if active_item == 2:
+			active_item = -1
+		else:
+			active_item = 2
+		equipped = true
+		
+	if !equipped:
+		return
+		
+	for child in $Camera/HandPivot.get_children():
+		child.queue_free()
+		
+	if active_item >= 0:
+		var item = items[active_item].model.instantiate()
+		item.scale = items[active_item].model_scale
+		$Camera/HandPivot.add_child(item)
+	
+func set_crouch(is_crouching: bool) -> void:
+	if crouch_tween and crouch_tween.is_running():
+		crouch_tween.kill()
+		
+	crouch_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	
+	var target_y = camera_origin_position.y
+	if is_crouching:
+		target_y -= crouch_offset
+		
+	crouch_tween.tween_property($Camera, "position:y", target_y, crouch_speed)
+	
 func interact_with_all_items():
 	var all_items = get_tree().get_nodes_in_group("items")
 	
@@ -92,7 +120,7 @@ func interact_with_all_items():
 					interaction_label.show()
 					can_interact = true
 					
-					if Input.is_action_just_pressed("pickup_item"):
+					if Input.is_action_just_pressed("pickup_item") and items.size() < inventory_size:
 						items.append(item.data)
 						item.queue_free()
 						inventory_ui.update_inventory_icons(items)
@@ -101,22 +129,68 @@ func interact_with_all_items():
 	if !can_interact:
 		interaction_label.hide()
 		
-func is_moving():
-	if Input.is_action_pressed("move_left")	or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_forward")	or Input.is_action_pressed("move_back"):
-		return true
-	return false
+func interact_with_all_put_items():
+	var all_items = get_tree().get_nodes_in_group("put_items")
 	
-func set_crouch(is_crouching: bool) -> void:
-	if crouch_tween and crouch_tween.is_running():
-		crouch_tween.kill()
+	var can_interact = false;
+	for item in all_items:
+		var items_vector = item.position - position
+		var camera_vector = -$Camera.get_global_transform().basis.z
 		
-	crouch_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		if items_vector.dot(camera_vector) >= cos(deg_to_rad(interaction_angle)):
+			if items_vector.length() <= interaction_distance:
+				if looking_at_item:
+					if active_item != -1:
+						put_item_label.show()
+						can_interact = true
+						
+						var equipped_item = items[active_item]
+						if Input.is_action_just_pressed("pickup_item") and item.item_name == equipped_item.item_name:
+							items.remove_at(active_item)
+							active_item = -1
+							inventory_ui.update_inventory_icons(items)
+							
+							for child in $Camera/HandPivot.get_children():
+								child.queue_free()
+								
+							# Spawn Object in the marker position
+							
+							var model_instance = equipped_item.model.instantiate()
+							model_instance.scale = equipped_item.model_scale
+							item.get_node("Marker").add_child(model_instance)
+											
+				
+	if !can_interact:
+		put_item_label.hide()
+		
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	camera_origin_position = $Camera.position
+	$Camera/RayCast3D.target_position.z = -interaction_distance
+	inventory_ui.hide()
+
+func _process(delta: float) -> void:
+	var current_q = basis.get_rotation_quaternion()
+	var twist_q = Quaternion(Vector3.UP, deg_to_rad(twist_input))
+	var pitch_q = Quaternion(Vector3.RIGHT, deg_to_rad(pitch_input))
+	var smoothed_q = current_q.slerp(twist_q * pitch_q, delta * 10.0)
+	basis = Basis(smoothed_q)
 	
-	var target_y = camera_origin_position.y
-	if is_crouching:
-		target_y -= crouch_offset
+	if Input.is_action_just_pressed("open_inventory"):
+		inventory_ui.show()
+		$OpenInventoryTimer.start()
+	
+	interact_with_all_items()
+	interact_with_all_put_items()
+	open_inventory_slot()
+	
+	looking_at_item = false
+
+func _physics_process(delta: float) -> void:
+	timer += delta * camera_shake_speed
+	slow_timer += delta * camera_shake_speed * 0.5
 		
-	crouch_tween.tween_property($Camera, "position:y", target_y, crouch_speed)
+	on_update_state(player_current_state, delta)
 	
 # STATE MACHINE
 func set_state(state):
@@ -163,17 +237,24 @@ func on_update_state(state, delta):
 			
 			var basis = $Camera.get_global_transform().basis
 			
+			var forward = -basis.z
+			forward.y = 0
+			forward = forward.normalized()
+			
+			var right = basis.x
+			right.y = 0
+			right = right.normalized()
+			
 			if Input.is_action_pressed("move_left"):
-				direction -= basis.x 
+				direction -= right
 			if Input.is_action_pressed("move_right"):
-				direction += basis.x
+				direction += right
 			if Input.is_action_pressed("move_forward"):
-				direction -= basis.z
+				direction += forward
 			if Input.is_action_pressed("move_back"):
-				direction += basis.z
+				direction -= forward
 				
 			if direction != Vector3.ZERO:
-				direction.y = 0
 				target_velocity = direction.normalized() * speed
 				
 			# Apply sidewalk penalty
@@ -183,7 +264,9 @@ func on_update_state(state, delta):
 			#elif target_velocity.dot(-basis.z) <= cos(deg_to_rad(50.0)):
 				#target_velocity *= sidewalk_penalty * 0.5
 				
-			velocity = target_velocity
+			velocity.x = target_velocity.x
+			velocity.z = target_velocity.z
+			velocity.y -= delta * gravity
 			move_and_slide()
 			
 			$Camera.position.y = camera_origin_position.y + camera_shake_amplitude * sin(slow_timer)

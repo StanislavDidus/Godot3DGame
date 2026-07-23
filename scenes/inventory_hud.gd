@@ -12,6 +12,9 @@ func _process(delta: float) -> void:
 	pass
 
 func update_inventory_icons(inventory: Array):
+	for i in range(0, slots.size()):
+		slots[i].get_node("TextureRect").texture = null
+
 	var current_slot = 0
 	for item in inventory:
 		slots[current_slot].get_node("TextureRect").texture = item.icon_image

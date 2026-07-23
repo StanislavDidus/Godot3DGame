@@ -24,9 +24,12 @@ mesh = SubResource("CapsuleMesh_oxmgc")
 [node name="Camera" type="Camera3D" parent="." unique_id=694365322]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6094731, 0)
 
+[node name="HandPivot" type="Node3D" parent="Camera" unique_id=1139457312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3922699, -0.36740366, -0.695072)
+
 [node name="RayCast3D" type="RayCast3D" parent="Camera" unique_id=812300409]
 target_position = Vector3(0, 0, -2.5)
-collision_mask = 6
+collision_mask = 14
 script = ExtResource("2_g2els")
 
 [node name="OpenInventoryTimer" type="Timer" parent="." unique_id=532693762]
