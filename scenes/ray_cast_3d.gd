@@ -4,5 +4,7 @@ signal hit_item
 
 func _process(delta: float) -> void:
 	if is_colliding():
-		if get_collider().is_in_group("items"):
-			hit_item.emit()
+		var collider = get_collider()
+		if collider != null:
+			if collider.is_in_group("items"):
+				hit_item.emit()
