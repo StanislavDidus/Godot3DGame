@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dwvk7epror4gu"]
+
+[ext_resource type="Script" uid="uid://y5vn6sal7kc5" path="res://scenes/put_item.gd" id="1_saenn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gnwv2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h28t3"]
+albedo_color = Color(0.6745098, 0, 0.039215688, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_itduq"]
+material = SubResource("StandardMaterial3D_h28t3")
+size = Vector3(0.41308594, 0.31311035, 0.38757324)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_saenn"]
+radius = 0.24833931
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oxmgc"]
+
+[node name="PutItem" type="StaticBody3D" unique_id=357020823 node_paths=PackedStringArray("item_position") groups=["put_items"]]
+collision_layer = 2
+script = ExtResource("1_saenn")
+item_position = NodePath("Marker")
+item_name = "Gear"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=298907454]
+mesh = SubResource("BoxMesh_gnwv2")
+
+[node name="Marker" type="StaticBody3D" parent="." unique_id=1879724888 groups=["put_items"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14126635, -0.5354007)
+collision_layer = 8
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Marker" unique_id=2102503704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010582089, 0.032409668, 0.21102405)
+mesh = SubResource("BoxMesh_itduq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Marker" unique_id=759677535]
+shape = SubResource("SphereShape3D_saenn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2087258195]
+shape = SubResource("BoxShape3D_oxmgc")

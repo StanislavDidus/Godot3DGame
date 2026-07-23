@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dab00exp2i86p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mva78"]
+albedo_color = Color(0.7490756, 0.60701466, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gnwv2"]
+material = SubResource("StandardMaterial3D_mva78")
+size = Vector3(0.5, 0.3, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60jus"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_gnwv2"]
+material = SubResource("StandardMaterial3D_60jus")
+inner_radius = 0.633
+
+[node name="Lock" type="Node3D" unique_id=977989371]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1422586038]
+mesh = SubResource("BoxMesh_gnwv2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=509850177]
+transform = Transform3D(0.25, 0, 0, 0, -1.0927847e-08, -0.25, 0, 0.25, -1.0927847e-08, 0, 0.14685832, 0)
+mesh = SubResource("TorusMesh_gnwv2")
+
+[node name="Number0" type="Label3D" parent="." unique_id=527322275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13365841, 0, 0.1295608)
+text = "0
+"
+
+[node name="Number1" type="Label3D" parent="." unique_id=1456538217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0070406795, 0, 0.1295608)
+text = "0
+"
+
+[node name="Number2" type="Label3D" parent="." unique_id=579772579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12342554, 0, 0.1295608)
+text = "0
+"

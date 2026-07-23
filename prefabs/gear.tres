@@ -2,9 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cabhd2pny84yq" path="res://scenes/item_data.gd" id="1_1tmdv"]
 [ext_resource type="Texture2D" uid="uid://kfggida6xwjy" path="res://assets/sprites/gear.png" id="1_7qjn2"]
+[ext_resource type="PackedScene" uid="uid://tuehpurawayu" path="res://assets/models/BoxBlender.glb" id="2_gyg02"]
 
 [resource]
 script = ExtResource("1_1tmdv")
 item_name = "Gear"
 icon_image = ExtResource("1_7qjn2")
+model = ExtResource("2_gyg02")
+model_scale = Vector3(0.3, 0.3, 0.3)
 metadata/_custom_type_script = "uid://cabhd2pny84yq"
