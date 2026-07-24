@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dab00exp2i86p"]
 
+[ext_resource type="Script" uid="uid://bib2u2a7yyn2m" path="res://scenes/lock.gd" id="1_60jus"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mva78"]
 albedo_color = Color(0.7490756, 0.60701466, 0, 1)
 
@@ -14,7 +16,18 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_60jus")
 inner_radius = 0.633
 
-[node name="Lock" type="Node3D" unique_id=977989371]
+[sub_resource type="BoxShape3D" id="BoxShape3D_oxmgc"]
+size = Vector3(0.53482056, 0.5287018, 0.75390625)
+
+[node name="Lock" type="StaticBody3D" unique_id=914556943 node_paths=PackedStringArray("text1", "text2", "text3") groups=["interactable"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_60jus")
+lock_name = "Basement"
+correct_combination = 444
+text1 = NodePath("Number0")
+text2 = NodePath("Number1")
+text3 = NodePath("Number2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1422586038]
 mesh = SubResource("BoxMesh_gnwv2")
@@ -37,3 +50,7 @@ text = "0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12342554, 0, 0.1295608)
 text = "0
 "
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1940310486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0013580322, 0.09549713, -0.123046875)
+shape = SubResource("BoxShape3D_oxmgc")

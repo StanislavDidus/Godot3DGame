@@ -18,7 +18,6 @@ extends CharacterBody3D
 
 @export_group("UI")
 @export var interaction_label: Node
-@export var put_item_label: Node
 @export var inventory_ui: Node
 
 @export_group("Inventory")
@@ -30,7 +29,9 @@ enum PLAYER_STATE
 {
 	IDLE,
 	WALK,
-	CROUCH
+	CROUCH,
+	LOCK_PICK,
+	CLOCK_PICK
 }
 
 # Camera shake properties
@@ -46,8 +47,12 @@ var player_current_state: PLAYER_STATE = PLAYER_STATE.IDLE
 
 var looking_at_item: bool = false
 
+var camera_transform_before_lock
 
 var crouch_tween: Tween
+
+var lock
+var clock
 
 func _unhandled_input(event: InputEvent) -> void:
 
@@ -55,12 +60,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		twist_input -= event.screen_relative.x * mouse_sensitivity
 		pitch_input -= event.screen_relative.y * mouse_sensitivity
 		pitch_input = clamp(pitch_input, -85, 85)
-
 		
 func is_moving():
 	if Input.is_action_pressed("move_left")	or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_forward")	or Input.is_action_pressed("move_back"):
 		return true
 	return false
+	
+func remove_item_in_hand():
+	for child in $Camera/HandPivot.get_children():
+		child.queue_free()
 	
 func open_inventory_slot():
 	var equipped = false
@@ -106,8 +114,8 @@ func set_crouch(is_crouching: bool) -> void:
 		
 	crouch_tween.tween_property($Camera, "position:y", target_y, crouch_speed)
 	
-func interact_with_all_items():
-	var all_items = get_tree().get_nodes_in_group("items")
+func interact():
+	var all_items = get_tree().get_nodes_in_group("interactable")
 	
 	var can_interact = false;
 	for item in all_items:
@@ -117,71 +125,36 @@ func interact_with_all_items():
 		if items_vector.dot(camera_vector) >= cos(deg_to_rad(interaction_angle)):
 			if items_vector.length() <= interaction_distance:
 				if looking_at_item:
-					interaction_label.show()
-					can_interact = true
-					
-					if Input.is_action_just_pressed("pickup_item") and items.size() < inventory_size:
-						items.append(item.data)
-						item.queue_free()
-						inventory_ui.update_inventory_icons(items)
+					if item.is_active:
+						interaction_label.show()
+						can_interact = true
+						
+						if Input.is_action_just_pressed("interact"):
+							item.interact(self)
+							break
 					
 				
 	if !can_interact:
 		interaction_label.hide()
-		
-func interact_with_all_put_items():
-	var all_items = get_tree().get_nodes_in_group("put_items")
-	
-	var can_interact = false;
-	for item in all_items:
-		var items_vector = item.position - position
-		var camera_vector = -$Camera.get_global_transform().basis.z
-		
-		if items_vector.dot(camera_vector) >= cos(deg_to_rad(interaction_angle)):
-			if items_vector.length() <= interaction_distance:
-				if looking_at_item:
-					if active_item != -1:
-						put_item_label.show()
-						can_interact = true
-						
-						var equipped_item = items[active_item]
-						if Input.is_action_just_pressed("pickup_item") and item.item_name == equipped_item.item_name:
-							items.remove_at(active_item)
-							active_item = -1
-							inventory_ui.update_inventory_icons(items)
-							
-							for child in $Camera/HandPivot.get_children():
-								child.queue_free()
-								
-							# Spawn Object in the marker position
-							
-							var model_instance = equipped_item.model.instantiate()
-							model_instance.scale = equipped_item.model_scale
-							item.get_node("Marker").add_child(model_instance)
-											
-				
-	if !can_interact:
-		put_item_label.hide()
 		
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_origin_position = $Camera.position
 	$Camera/RayCast3D.target_position.z = -interaction_distance
 	inventory_ui.hide()
-
-func _process(delta: float) -> void:
+	
+func move_camera(delta: float):
 	var current_q = basis.get_rotation_quaternion()
 	var twist_q = Quaternion(Vector3.UP, deg_to_rad(twist_input))
 	var pitch_q = Quaternion(Vector3.RIGHT, deg_to_rad(pitch_input))
 	var smoothed_q = current_q.slerp(twist_q * pitch_q, delta * 10.0)
 	basis = Basis(smoothed_q)
-	
+
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("open_inventory"):
 		inventory_ui.show()
 		$OpenInventoryTimer.start()
 	
-	interact_with_all_items()
-	interact_with_all_put_items()
 	open_inventory_slot()
 	
 	looking_at_item = false
@@ -211,18 +184,26 @@ func on_enter_state(state):
 			pass
 		PLAYER_STATE.CROUCH:
 			set_crouch(true)
+		PLAYER_STATE.LOCK_PICK:
+			interaction_label.hide()
+			camera_transform_before_lock = $Camera.transform
+		PLAYER_STATE.CLOCK_PICK:
+			interaction_label.hide()
+			camera_transform_before_lock = $Camera.transform
 	
 func on_update_state(state, delta):
 	match state:
 		PLAYER_STATE.IDLE:
-		
 			if is_moving():
 				set_state(PLAYER_STATE.WALK)
 			
 			if Input.is_action_pressed("crouch"):
 				set_state(PLAYER_STATE.CROUCH)
 				
+			move_camera(delta)
 			$Camera.position.y = camera_origin_position.y + camera_shake_amplitude * sin(slow_timer) * 0.5
+			
+			interact()
 				
 		PLAYER_STATE.WALK:
 		
@@ -232,6 +213,10 @@ func on_update_state(state, delta):
 			if Input.is_action_pressed("crouch"):
 				set_state(PLAYER_STATE.CROUCH)
 				
+			move_camera(delta)
+			
+			interact()
+			
 			var direction = Vector3.ZERO		
 			var target_velocity = Vector3.ZERO
 			
@@ -274,6 +259,28 @@ func on_update_state(state, delta):
 		PLAYER_STATE.CROUCH:
 			if !Input.is_action_pressed("crouch"):
 				set_state(PLAYER_STATE.IDLE)
+				
+			move_camera(delta)
+			interact()
+				
+		PLAYER_STATE.LOCK_PICK:
+			if Input.is_action_just_pressed("stop_lock_pick"):
+				set_state(PLAYER_STATE.WALK)
+				
+			if lock != null:
+				lock.update()
+				
+				if !lock.is_active:
+					set_state(PLAYER_STATE.IDLE)
+		PLAYER_STATE.CLOCK_PICK:
+			if Input.is_action_just_pressed("stop_lock_pick"):
+				set_state(PLAYER_STATE.WALK)
+				
+			if clock != null:
+				clock.update()
+				
+				if !clock.is_active:
+					set_state(PLAYER_STATE.IDLE)
 	
 func on_exit_state(state):
 	match state:
@@ -283,7 +290,12 @@ func on_exit_state(state):
 			pass
 		PLAYER_STATE.CROUCH:
 			set_crouch(false)
-
+		PLAYER_STATE.LOCK_PICK:
+			$Camera.transform = camera_transform_before_lock
+			lock = null
+		PLAYER_STATE.CLOCK_PICK:
+			$Camera.transform = camera_transform_before_lock
+			clock = null
 
 func _on_ray_cast_3d_hit_item() -> void:
 	looking_at_item = true

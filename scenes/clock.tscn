@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://srruoaw4rsbr"]
+
+[ext_resource type="Script" uid="uid://dddefykypnh1p" path="res://scenes/clock.gd" id="1_vlc7k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oxmgc"]
+size = Vector3(1, 2.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oxmgc"]
+size = Vector3(1, 2.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itduq"]
+albedo_color = Color(0.96017355, 0.4069827, 0.5788638, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gnwv2"]
+material = SubResource("StandardMaterial3D_itduq")
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h28t3"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_itduq"]
+material = SubResource("StandardMaterial3D_h28t3")
+size = Vector3(0.3660742, 0.025, 0.01)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a0mjl"]
+material = SubResource("StandardMaterial3D_h28t3")
+size = Vector3(0.161, 0.025, 0.01)
+
+[node name="Clock" type="StaticBody3D" unique_id=1584196817 groups=["interactable"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_vlc7k")
+clock_name = "Main clock"
+small_arrow_solution = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=60032371]
+shape = SubResource("BoxShape3D_oxmgc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=297517712]
+mesh = SubResource("BoxMesh_oxmgc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1608195546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6627523, 0.18290734)
+mesh = SubResource("BoxMesh_gnwv2")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=502514910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6509807, 0.61272717)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot" unique_id=595673389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19248737, 0, 0)
+mesh = SubResource("BoxMesh_itduq")
+
+[node name="Pivot2" type="Node3D" parent="." unique_id=457788903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6509807, 0.61272717)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Pivot2" unique_id=1851750821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.068999484, 0, 0)
+mesh = SubResource("BoxMesh_a0mjl")
+
+[node name="LookAt" type="Node3D" parent="." unique_id=1844482216]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95375776, 0.6656136)

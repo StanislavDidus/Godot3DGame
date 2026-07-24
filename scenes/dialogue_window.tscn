@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://b1cye5bneavpg"]
+
+[ext_resource type="FontFile" uid="uid://bb0y0hpx8v1wg" path="res://assets/fonts/Main.otf" id="1_b1c2b"]
+[ext_resource type="Script" uid="uid://dlhy3vu2i8xul" path="res://scenes/dialogue_window.gd" id="1_tdpx6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oxmgc"]
+font = ExtResource("1_b1c2b")
+font_size = 12
+font_color = Color(0.8666667, 0.827451, 0.12941177, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=559175696]
+scale = Vector2(1, 1.0015113)
+transform = Transform2D(1, 0, -0.055, 1, 0, 0)
+script = ExtResource("1_tdpx6")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1201408030]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.809999
+offset_top = -96.0
+offset_right = -1.7449951
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.11764706, 0.11764706, 0.11764706, 0.7764706)
+
+[node name="Label" type="Label" parent="." unique_id=1134113233]
+custom_maximum_size = Vector2(-1, 94.92)
+propagate_maximum_size = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -142.475
+offset_top = -85.0
+offset_right = 167.92499
+offset_bottom = 2.2399902
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_oxmgc")
+autowrap_mode = 2
