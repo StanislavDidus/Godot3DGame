@@ -7,6 +7,8 @@ extends Node
 
 @export var clock_note: Node3D
 
+#@export var items: Array[Node3D]
+
 var basement_lock_code: int
 
 func init(): # Randomize function
@@ -17,12 +19,16 @@ func init(): # Randomize function
 	
 	clock_note.init()
 	
+	for item in get_tree().get_nodes_in_group("items"):
+		item.randomize()
+	
 
 func _ready() -> void:
 	init()
 	
 func _process(delta: float) -> void:
-	pass	
+	if Input.is_action_just_pressed("randomize"):
+		init()
 
 func _on_lock_lock_opened(name: Variant) -> void:
 	match name:

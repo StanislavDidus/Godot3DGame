@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends RigidBody3D
 
 @export var data: item_data
 
@@ -6,23 +6,33 @@ extends StaticBody3D
 
 var is_active = true
 
+func randomize():
+	random_spawn()	
+
+func init():
+	if data:
+		if data.model != null:
+			var model = data.model.instantiate()
+			add_child(model)
+			model.scale = data.model_scale
+		else:
+			$MeshInstance3D.hide()
+		
+	data.item_scene = duplicate()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	random_spawn()
-	
-	if data.model != null:
-		var model = data.model.instantiate()
-		add_child(model)
-		model.scale = data.model_scale
-	else:
-		$MeshInstance3D.hide()
+	init()
 
 func random_spawn():
 	var rand = randi() % spawn_points.size()
 	position = spawn_points[rand].global_position
 
 func interact(player):
-	if player.items.size() < player.inventory_size:
-		player.items.append(data)
-		player.inventory_ui.update_inventory_icons(player.items)
+	if player.active_item == null:
+		player.active_item = data
 		queue_free()		
+		
+		var item = data.model.instantiate()
+		item.scale = data.model_scale
+		player.get_node("Camera/HandPivot").add_child(item)
+		
