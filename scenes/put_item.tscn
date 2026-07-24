@@ -16,16 +16,17 @@ radius = 0.24833931
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oxmgc"]
 
-[node name="PutItem" type="StaticBody3D" unique_id=357020823 node_paths=PackedStringArray("item_position") groups=["put_items"]]
-collision_layer = 2
+[node name="PutItem" type="StaticBody3D" unique_id=357020823 node_paths=PackedStringArray("item_position") groups=["interactable"]]
+collision_layer = 4
 script = ExtResource("1_saenn")
+put_item_name = "Statue"
 item_position = NodePath("Marker")
 item_name = "Gear"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=298907454]
 mesh = SubResource("BoxMesh_gnwv2")
 
-[node name="Marker" type="StaticBody3D" parent="." unique_id=1879724888 groups=["put_items"]]
+[node name="Marker" type="StaticBody3D" parent="." unique_id=1879724888 groups=["interactable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14126635, -0.5354007)
 collision_layer = 8
 

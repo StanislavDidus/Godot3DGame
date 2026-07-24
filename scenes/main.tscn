@@ -2,13 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://vvebi1hfg0ue" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://863n4y0fhcc6" path="res://scenes/item.tscn" id="2_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://bvgiou53e27yt" path="res://scenes/put_item_hud.tscn" id="2_tipki"]
 [ext_resource type="Resource" uid="uid://20fxlivvxhqc" path="res://prefabs/gear.tres" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c1u6q57wj8rmx" path="res://scenes/interact_hud.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://csqcpmuorev6i" path="res://scenes/inventory_hud.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://tuehpurawayu" path="res://assets/models/BoxBlender.glb" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://dwvk7epror4gu" path="res://scenes/put_item.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dab00exp2i86p" path="res://scenes/lock.tscn" id="9_85g3d"]
+[ext_resource type="Shader" uid="uid://b8xojqdwjhibi" path="res://shaders/ps1_post_process.gdshader" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://ssa4w6na7yqu" path="res://scenes/game_manager.tscn" id="10_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://b1cye5bneavpg" path="res://scenes/dialogue_window.tscn" id="11_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://bqa0ordccf076" path="res://scenes/cauldron.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://ctopeteqvwmbh" path="res://scenes/note.tscn" id="13_trceg"]
+[ext_resource type="PackedScene" uid="uid://srruoaw4rsbr" path="res://scenes/clock.tscn" id="14_a8y0u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oxmgc"]
 size = Vector3(10, 0.1, 20)
@@ -46,8 +51,16 @@ size = Vector3(1, 10, 21)
 [sub_resource type="BoxMesh" id="BoxMesh_itduq"]
 size = Vector3(1, 10, 21)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85g3d"]
+shader = ExtResource("10_choun")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_itduq"]
 size = Vector3(2, 2, 2)
+
+[sub_resource type="Environment" id="Environment_choun"]
+ambient_light_source = 3
+ambient_light_color = Color(0.11764706, 0.13333334, 0.1764706, 1)
+ambient_light_energy = 0.3
 
 [node name="Main" type="Node" unique_id=1519494960]
 
@@ -62,10 +75,9 @@ shape = SubResource("BoxShape3D_oxmgc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.5)
 mesh = SubResource("BoxMesh_sgp6g")
 
-[node name="Player" parent="." unique_id=619208955 node_paths=PackedStringArray("interaction_label", "put_item_label", "inventory_ui") instance=ExtResource("1_o5qli")]
+[node name="Player" parent="." unique_id=619208955 node_paths=PackedStringArray("interaction_label", "inventory_ui") instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0531633, 0)
 interaction_label = NodePath("../InteractHUD")
-put_item_label = NodePath("../PutItemHUD")
 inventory_ui = NodePath("../InventoryHUD")
 
 [node name="Table" type="StaticBody3D" parent="." unique_id=94331430]
@@ -78,6 +90,13 @@ shape = SubResource("BoxShape3D_gnwv2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Table" unique_id=1019167376]
 mesh = SubResource("BoxMesh_oxmgc")
 
+[node name="Label3D" type="Label3D" parent="Table" unique_id=1004295665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3879242, 0, 1.0051689)
+pixel_size = 0.01
+modulate = Color(0.3711189, 0.3711191, 0.371119, 1)
+text = "000"
+font_size = 46
+
 [node name="Table2" type="StaticBody3D" parent="." unique_id=1875974648]
 transform = Transform3D(0.44474837, 0, -0.15307543, 0, 1.705, 0, 0.22847077, 0, 0.2979814, -2.2719314, -0.006031275, 6.1372957)
 collision_layer = 2
@@ -86,6 +105,7 @@ collision_layer = 2
 shape = SubResource("BoxShape3D_gnwv2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Table2" unique_id=317838663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.053994045, 0)
 mesh = SubResource("BoxMesh_85g3d")
 
 [node name="Wall" type="StaticBody3D" parent="." unique_id=666170845]
@@ -100,9 +120,13 @@ shape = SubResource("BoxShape3D_sugp2")
 mesh = SubResource("BoxMesh_jyhfs")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=303230834]
-transform = Transform3D(0.90915155, 0.40732938, -0.08675393, 0.16880625, -0.16999239, 0.9708795, 0.38072017, -0.8973212, -0.22330855, -0.8298435, 16.336884, -3.0520363)
+transform = Transform3D(0.76481986, -0.60619515, -0.2181236, 0.14174017, -0.17194693, 0.974856, -0.62845856, -0.77650607, -0.045586303, -1.290956, 16.336884, -5.6461554)
+light_color = Color(0.72357595, 0.72357595, 0.66280055, 1)
 light_energy = 2.0
 shadow_enabled = true
+shadow_bias = 1.057
+shadow_normal_bias = 2.146
+shadow_blur = 3.535
 
 [node name="Walls" type="Node" parent="." unique_id=1768569498]
 
@@ -168,11 +192,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64680696, 0.14315772, 0.857
 [node name="Pos3" type="Marker3D" parent="Item" unique_id=327908119]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75218725, -1.250961, 1.5082321)
 
+[node name="PS1 Effect" type="CanvasLayer" parent="." unique_id=150605404]
+
+[node name="ColorRect" type="ColorRect" parent="PS1 Effect" unique_id=2128456309]
+material = SubResource("ShaderMaterial_85g3d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="InteractHUD" parent="." unique_id=1569353770 instance=ExtResource("3_sugp2")]
 
 [node name="InventoryHUD" parent="." unique_id=2097994074 instance=ExtResource("5_tbgi4")]
-
-[node name="PutItemHUD" parent="." unique_id=1611637451 instance=ExtResource("2_tipki")]
 
 [node name="Box" type="StaticBody3D" parent="." unique_id=26516098]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 2.3877513, 0.7176776, 7.05343)
@@ -189,3 +222,31 @@ transform = Transform3D(0.3978382, 0, 0.9174557, 0, 1, 0, -0.9174557, 0, 0.39783
 
 [node name="Lock" parent="." unique_id=977989371 instance=ExtResource("9_85g3d")]
 transform = Transform3D(-0.8983811, 0, 0.43921697, 0, 1, 0, -0.43921697, 0, -0.8983811, -2.078287, 0.4303015, 5.7800217)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1596189335]
+environment = SubResource("Environment_choun")
+
+[node name="game_manager" parent="." unique_id=1153036137 node_paths=PackedStringArray("dialogue_window", "basement_lock", "basement_wall_code", "clock_note") instance=ExtResource("10_ya4ey")]
+dialogue_window = NodePath("../DialogueWindow")
+basement_lock = NodePath("../Lock")
+basement_wall_code = NodePath("../Table/Label3D")
+clock_note = NodePath("../Note")
+
+[node name="DialogueWindow" parent="." unique_id=1150618293 instance=ExtResource("11_ya4ey")]
+
+[node name="cauldron" parent="." unique_id=1382961925 node_paths=PackedStringArray("dialogue_window") instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018258572, 0.3709464, 3.3223176)
+dialogue_window = NodePath("../DialogueWindow")
+
+[node name="Note" parent="." unique_id=2054639166 node_paths=PackedStringArray("dialogue_window", "clock") instance=ExtResource("13_trceg")]
+transform = Transform3D(1, 0, 0, 0, 0.5449617, 0, 0, 0, 1, 2.3274858, 1.631951, 4.819796)
+dialogue_window = NodePath("../DialogueWindow")
+duration = 10.0
+clock_note = true
+clock = NodePath("../Clock")
+
+[node name="Clock" parent="." unique_id=1584196817 instance=ExtResource("14_a8y0u")]
+transform = Transform3D(-0.99560165, 0, 0.09368843, 0, 1, 0, -0.09368843, 0, -0.99560165, -0.5096066, 1.303453, 7.5444026)
+
+[connection signal="item_put" from="PutItem" to="game_manager" method="_on_put_item_item_put"]
+[connection signal="lock_opened" from="Lock" to="game_manager" method="_on_lock_lock_opened"]

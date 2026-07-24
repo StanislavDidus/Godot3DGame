@@ -4,6 +4,8 @@ extends StaticBody3D
 
 @export var spawn_points: Array[Marker3D]
 
+var is_active = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	random_spawn()
@@ -15,10 +17,12 @@ func _ready() -> void:
 	else:
 		$MeshInstance3D.hide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func random_spawn():
 	var rand = randi() % spawn_points.size()
 	position = spawn_points[rand].global_position
+
+func interact(player):
+	if player.items.size() < player.inventory_size:
+		player.items.append(data)
+		player.inventory_ui.update_inventory_icons(player.items)
+		queue_free()		

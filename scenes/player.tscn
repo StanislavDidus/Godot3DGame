@@ -29,7 +29,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3922699, -0.36740366, -0.69
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera" unique_id=812300409]
 target_position = Vector3(0, 0, -2.5)
-collision_mask = 14
+collision_mask = 6
 script = ExtResource("2_g2els")
 
 [node name="OpenInventoryTimer" type="Timer" parent="." unique_id=532693762]
