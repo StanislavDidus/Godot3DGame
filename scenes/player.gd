@@ -18,12 +18,9 @@ extends CharacterBody3D
 
 @export_group("UI")
 @export var interaction_label: Node
-@export var inventory_ui: Node
+#@export var inventory_ui: Node
 
-@export_group("Inventory")
-@export var inventory_size = 3
-var items: Array
-var active_item = -1
+var active_item: item_data
 
 enum PLAYER_STATE
 {
@@ -70,37 +67,24 @@ func remove_item_in_hand():
 	for child in $Camera/HandPivot.get_children():
 		child.queue_free()
 	
-func open_inventory_slot():
-	var equipped = false
-	if Input.is_action_just_pressed("open_inventory_slot_1") and items.size() > 0:
-		if active_item == 0:
-			active_item = -1
-		else:
-			active_item = 0
-		equipped = true
-	if Input.is_action_just_pressed("open_inventory_slot_2") and items.size() > 1:
-		if active_item == 1:
-			active_item = -1
-		else:
-			active_item = 1
-		equipped = true
-	if Input.is_action_just_pressed("open_inventory_slot_3") and items.size() > 2:
-		if active_item == 2:
-			active_item = -1
-		else:
-			active_item = 2
-		equipped = true
+func drop_item():
+	if active_item != null and active_item.item_scene != null and drop_item != null:
+		var item_to_drop = active_item
 		
-	if !equipped:
-		return
+		#var dropped_item = active_item.item_scene.instantiate()
+		var dropped_item = load("res://scenes/item.tscn").instantiate()
+		#print(dropped_item.get_script())
+		dropped_item.data = active_item
+		get_tree().current_scene.add_child(dropped_item)
 		
-	for child in $Camera/HandPivot.get_children():
-		child.queue_free()
+		dropped_item.init()
+		dropped_item.global_position = global_position
+		var forward = -get_global_transform().basis.z.normalized()
+		dropped_item.apply_impulse(forward * 4.0)
+		dropped_item.position += forward * 1.1
+		active_item = null
 		
-	if active_item >= 0:
-		var item = items[active_item].model.instantiate()
-		item.scale = items[active_item].model_scale
-		$Camera/HandPivot.add_child(item)
+		remove_item_in_hand()
 	
 func set_crouch(is_crouching: bool) -> void:
 	if crouch_tween and crouch_tween.is_running():
@@ -141,7 +125,6 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_origin_position = $Camera.position
 	$Camera/RayCast3D.target_position.z = -interaction_distance
-	inventory_ui.hide()
 	
 func move_camera(delta: float):
 	var current_q = basis.get_rotation_quaternion()
@@ -151,12 +134,6 @@ func move_camera(delta: float):
 	basis = Basis(smoothed_q)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("open_inventory"):
-		inventory_ui.show()
-		$OpenInventoryTimer.start()
-	
-	open_inventory_slot()
-	
 	looking_at_item = false
 
 func _physics_process(delta: float) -> void:
@@ -199,6 +176,12 @@ func on_update_state(state, delta):
 			
 			if Input.is_action_pressed("crouch"):
 				set_state(PLAYER_STATE.CROUCH)
+				
+			
+			if Input.is_action_just_pressed("drop_item"):
+				drop_item()	
+
+			velocity.y -= delta * gravity
 				
 			move_camera(delta)
 			$Camera.position.y = camera_origin_position.y + camera_shake_amplitude * sin(slow_timer) * 0.5
@@ -256,12 +239,21 @@ func on_update_state(state, delta):
 			
 			$Camera.position.y = camera_origin_position.y + camera_shake_amplitude * sin(slow_timer)
 			
+			if Input.is_action_just_pressed("drop_item"):
+				drop_item()	
+			
 		PLAYER_STATE.CROUCH:
 			if !Input.is_action_pressed("crouch"):
 				set_state(PLAYER_STATE.IDLE)
 				
+			if Input.is_action_just_pressed("drop_item"):
+				drop_item()	
+				
 			move_camera(delta)
 			interact()
+			
+			velocity.y -= delta * gravity
+			move_and_slide()
 				
 		PLAYER_STATE.LOCK_PICK:
 			if Input.is_action_just_pressed("stop_lock_pick"):
@@ -302,4 +294,5 @@ func _on_ray_cast_3d_hit_item() -> void:
 
 
 func _on_open_inventory_timer_timeout() -> void:
-	inventory_ui.hide()
+	#inventory_ui.hide()
+	pass
