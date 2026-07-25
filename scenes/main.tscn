@@ -72,6 +72,9 @@ ambient_light_color = Color(0.11764706, 0.13333334, 0.1764706, 1)
 ambient_light_energy = 0.3
 
 [sub_resource type="FontFile" id="FontFile_oxmgc"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/variation_coordinates = {}
 cache/0/face_index = 0
 cache/0/embolden = 0.0
