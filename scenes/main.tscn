@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://d0lj0uom2cr2i" path="res://scenes/inherited/put_statue.tscn" id="18_dp3eg"]
 [ext_resource type="Resource" uid="uid://b4gpxgwx7bmmn" path="res://prefabs/trophy.tres" id="19_0ld40"]
 [ext_resource type="Resource" uid="uid://bkbdnbt8j3pjq" path="res://prefabs/projector_lens.tres" id="20_gqmmt"]
+[ext_resource type="Resource" uid="uid://0dol7us8630k" path="res://prefabs/statue_head.tres" id="20_yq6so"]
 [ext_resource type="Resource" uid="uid://drytetm5swxp2" path="res://prefabs/screwdriver.tres" id="21_yc10j"]
 [ext_resource type="Resource" uid="uid://btthk6dk3662y" path="res://prefabs/laptop.tres" id="22_jscy8"]
 [ext_resource type="Resource" uid="uid://nbcqqpn7cxpr" path="res://prefabs/cable.tres" id="23_pm3ni"]
@@ -59,12 +60,6 @@ size = Vector3(2, 1, 0.2)
 material = SubResource("StandardMaterial3D_gnwv2")
 size = Vector3(2, 1, 0.2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_h28t3"]
-size = Vector3(1, 10, 21)
-
-[sub_resource type="BoxMesh" id="BoxMesh_itduq"]
-size = Vector3(1, 10, 21)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_85g3d"]
 shader = ExtResource("10_choun")
 
@@ -75,6 +70,337 @@ size = Vector3(2, 2, 2)
 ambient_light_source = 3
 ambient_light_color = Color(0.11764706, 0.13333334, 0.1764706, 1)
 ambient_light_energy = 0.3
+
+[sub_resource type="FontFile" id="FontFile_oxmgc"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/53/0/ascent = 0.0
+cache/0/53/0/descent = 0.0
+cache/0/53/0/underline_position = 0.0
+cache/0/53/0/underline_thickness = 0.0
+cache/0/53/0/scale = 1.0
+cache/0/54/0/ascent = 0.0
+cache/0/54/0/descent = 0.0
+cache/0/54/0/underline_position = 0.0
+cache/0/54/0/underline_thickness = 0.0
+cache/0/54/0/scale = 1.0
+cache/0/55/0/ascent = 0.0
+cache/0/55/0/descent = 0.0
+cache/0/55/0/underline_position = 0.0
+cache/0/55/0/underline_thickness = 0.0
+cache/0/55/0/scale = 1.0
+cache/0/59/0/ascent = 0.0
+cache/0/59/0/descent = 0.0
+cache/0/59/0/underline_position = 0.0
+cache/0/59/0/underline_thickness = 0.0
+cache/0/59/0/scale = 1.0
+cache/0/60/0/ascent = 0.0
+cache/0/60/0/descent = 0.0
+cache/0/60/0/underline_position = 0.0
+cache/0/60/0/underline_thickness = 0.0
+cache/0/60/0/scale = 1.0
+cache/0/61/0/ascent = 0.0
+cache/0/61/0/descent = 0.0
+cache/0/61/0/underline_position = 0.0
+cache/0/61/0/underline_thickness = 0.0
+cache/0/61/0/scale = 1.0
+cache/0/62/0/ascent = 0.0
+cache/0/62/0/descent = 0.0
+cache/0/62/0/underline_position = 0.0
+cache/0/62/0/underline_thickness = 0.0
+cache/0/62/0/scale = 1.0
+cache/0/63/0/ascent = 0.0
+cache/0/63/0/descent = 0.0
+cache/0/63/0/underline_position = 0.0
+cache/0/63/0/underline_thickness = 0.0
+cache/0/63/0/scale = 1.0
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/65/0/ascent = 0.0
+cache/0/65/0/descent = 0.0
+cache/0/65/0/underline_position = 0.0
+cache/0/65/0/underline_thickness = 0.0
+cache/0/65/0/scale = 1.0
+cache/0/66/0/ascent = 0.0
+cache/0/66/0/descent = 0.0
+cache/0/66/0/underline_position = 0.0
+cache/0/66/0/underline_thickness = 0.0
+cache/0/66/0/scale = 1.0
+cache/0/67/0/ascent = 0.0
+cache/0/67/0/descent = 0.0
+cache/0/67/0/underline_position = 0.0
+cache/0/67/0/underline_thickness = 0.0
+cache/0/67/0/scale = 1.0
+cache/0/68/0/ascent = 0.0
+cache/0/68/0/descent = 0.0
+cache/0/68/0/underline_position = 0.0
+cache/0/68/0/underline_thickness = 0.0
+cache/0/68/0/scale = 1.0
+cache/0/69/0/ascent = 0.0
+cache/0/69/0/descent = 0.0
+cache/0/69/0/underline_position = 0.0
+cache/0/69/0/underline_thickness = 0.0
+cache/0/69/0/scale = 1.0
+cache/0/70/0/ascent = 0.0
+cache/0/70/0/descent = 0.0
+cache/0/70/0/underline_position = 0.0
+cache/0/70/0/underline_thickness = 0.0
+cache/0/70/0/scale = 1.0
+cache/0/71/0/ascent = 0.0
+cache/0/71/0/descent = 0.0
+cache/0/71/0/underline_position = 0.0
+cache/0/71/0/underline_thickness = 0.0
+cache/0/71/0/scale = 1.0
+cache/0/72/0/ascent = 0.0
+cache/0/72/0/descent = 0.0
+cache/0/72/0/underline_position = 0.0
+cache/0/72/0/underline_thickness = 0.0
+cache/0/72/0/scale = 1.0
+cache/0/73/0/ascent = 0.0
+cache/0/73/0/descent = 0.0
+cache/0/73/0/underline_position = 0.0
+cache/0/73/0/underline_thickness = 0.0
+cache/0/73/0/scale = 1.0
+cache/0/74/0/ascent = 0.0
+cache/0/74/0/descent = 0.0
+cache/0/74/0/underline_position = 0.0
+cache/0/74/0/underline_thickness = 0.0
+cache/0/74/0/scale = 1.0
+cache/0/75/0/ascent = 0.0
+cache/0/75/0/descent = 0.0
+cache/0/75/0/underline_position = 0.0
+cache/0/75/0/underline_thickness = 0.0
+cache/0/75/0/scale = 1.0
+cache/0/76/0/ascent = 0.0
+cache/0/76/0/descent = 0.0
+cache/0/76/0/underline_position = 0.0
+cache/0/76/0/underline_thickness = 0.0
+cache/0/76/0/scale = 1.0
+cache/0/77/0/ascent = 0.0
+cache/0/77/0/descent = 0.0
+cache/0/77/0/underline_position = 0.0
+cache/0/77/0/underline_thickness = 0.0
+cache/0/77/0/scale = 1.0
+cache/0/78/0/ascent = 0.0
+cache/0/78/0/descent = 0.0
+cache/0/78/0/underline_position = 0.0
+cache/0/78/0/underline_thickness = 0.0
+cache/0/78/0/scale = 1.0
+cache/0/80/0/ascent = 0.0
+cache/0/80/0/descent = 0.0
+cache/0/80/0/underline_position = 0.0
+cache/0/80/0/underline_thickness = 0.0
+cache/0/80/0/scale = 1.0
+cache/0/81/0/ascent = 0.0
+cache/0/81/0/descent = 0.0
+cache/0/81/0/underline_position = 0.0
+cache/0/81/0/underline_thickness = 0.0
+cache/0/81/0/scale = 1.0
+cache/0/82/0/ascent = 0.0
+cache/0/82/0/descent = 0.0
+cache/0/82/0/underline_position = 0.0
+cache/0/82/0/underline_thickness = 0.0
+cache/0/82/0/scale = 1.0
+cache/0/83/0/ascent = 0.0
+cache/0/83/0/descent = 0.0
+cache/0/83/0/underline_position = 0.0
+cache/0/83/0/underline_thickness = 0.0
+cache/0/83/0/scale = 1.0
+cache/0/84/0/ascent = 0.0
+cache/0/84/0/descent = 0.0
+cache/0/84/0/underline_position = 0.0
+cache/0/84/0/underline_thickness = 0.0
+cache/0/84/0/scale = 1.0
+cache/0/85/0/ascent = 0.0
+cache/0/85/0/descent = 0.0
+cache/0/85/0/underline_position = 0.0
+cache/0/85/0/underline_thickness = 0.0
+cache/0/85/0/scale = 1.0
+cache/0/86/0/ascent = 0.0
+cache/0/86/0/descent = 0.0
+cache/0/86/0/underline_position = 0.0
+cache/0/86/0/underline_thickness = 0.0
+cache/0/86/0/scale = 1.0
+cache/0/87/0/ascent = 0.0
+cache/0/87/0/descent = 0.0
+cache/0/87/0/underline_position = 0.0
+cache/0/87/0/underline_thickness = 0.0
+cache/0/87/0/scale = 1.0
+cache/0/88/0/ascent = 0.0
+cache/0/88/0/descent = 0.0
+cache/0/88/0/underline_position = 0.0
+cache/0/88/0/underline_thickness = 0.0
+cache/0/88/0/scale = 1.0
+cache/0/89/0/ascent = 0.0
+cache/0/89/0/descent = 0.0
+cache/0/89/0/underline_position = 0.0
+cache/0/89/0/underline_thickness = 0.0
+cache/0/89/0/scale = 1.0
+cache/0/90/0/ascent = 0.0
+cache/0/90/0/descent = 0.0
+cache/0/90/0/underline_position = 0.0
+cache/0/90/0/underline_thickness = 0.0
+cache/0/90/0/scale = 1.0
+cache/0/91/0/ascent = 0.0
+cache/0/91/0/descent = 0.0
+cache/0/91/0/underline_position = 0.0
+cache/0/91/0/underline_thickness = 0.0
+cache/0/91/0/scale = 1.0
+cache/0/92/0/ascent = 0.0
+cache/0/92/0/descent = 0.0
+cache/0/92/0/underline_position = 0.0
+cache/0/92/0/underline_thickness = 0.0
+cache/0/92/0/scale = 1.0
+cache/0/93/0/ascent = 0.0
+cache/0/93/0/descent = 0.0
+cache/0/93/0/underline_position = 0.0
+cache/0/93/0/underline_thickness = 0.0
+cache/0/93/0/scale = 1.0
+cache/0/94/0/ascent = 0.0
+cache/0/94/0/descent = 0.0
+cache/0/94/0/underline_position = 0.0
+cache/0/94/0/underline_thickness = 0.0
+cache/0/94/0/scale = 1.0
+cache/0/95/0/ascent = 0.0
+cache/0/95/0/descent = 0.0
+cache/0/95/0/underline_position = 0.0
+cache/0/95/0/underline_thickness = 0.0
+cache/0/95/0/scale = 1.0
+cache/0/96/0/ascent = 0.0
+cache/0/96/0/descent = 0.0
+cache/0/96/0/underline_position = 0.0
+cache/0/96/0/underline_thickness = 0.0
+cache/0/96/0/scale = 1.0
+cache/0/97/0/ascent = 0.0
+cache/0/97/0/descent = 0.0
+cache/0/97/0/underline_position = 0.0
+cache/0/97/0/underline_thickness = 0.0
+cache/0/97/0/scale = 1.0
+cache/0/98/0/ascent = 0.0
+cache/0/98/0/descent = 0.0
+cache/0/98/0/underline_position = 0.0
+cache/0/98/0/underline_thickness = 0.0
+cache/0/98/0/scale = 1.0
+cache/0/99/0/ascent = 0.0
+cache/0/99/0/descent = 0.0
+cache/0/99/0/underline_position = 0.0
+cache/0/99/0/underline_thickness = 0.0
+cache/0/99/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/101/0/ascent = 0.0
+cache/0/101/0/descent = 0.0
+cache/0/101/0/underline_position = 0.0
+cache/0/101/0/underline_thickness = 0.0
+cache/0/101/0/scale = 1.0
+cache/0/102/0/ascent = 0.0
+cache/0/102/0/descent = 0.0
+cache/0/102/0/underline_position = 0.0
+cache/0/102/0/underline_thickness = 0.0
+cache/0/102/0/scale = 1.0
+cache/0/103/0/ascent = 0.0
+cache/0/103/0/descent = 0.0
+cache/0/103/0/underline_position = 0.0
+cache/0/103/0/underline_thickness = 0.0
+cache/0/103/0/scale = 1.0
+cache/0/104/0/ascent = 0.0
+cache/0/104/0/descent = 0.0
+cache/0/104/0/underline_position = 0.0
+cache/0/104/0/underline_thickness = 0.0
+cache/0/104/0/scale = 1.0
+cache/0/105/0/ascent = 0.0
+cache/0/105/0/descent = 0.0
+cache/0/105/0/underline_position = 0.0
+cache/0/105/0/underline_thickness = 0.0
+cache/0/105/0/scale = 1.0
+cache/0/106/0/ascent = 0.0
+cache/0/106/0/descent = 0.0
+cache/0/106/0/underline_position = 0.0
+cache/0/106/0/underline_thickness = 0.0
+cache/0/106/0/scale = 1.0
+cache/0/107/0/ascent = 0.0
+cache/0/107/0/descent = 0.0
+cache/0/107/0/underline_position = 0.0
+cache/0/107/0/underline_thickness = 0.0
+cache/0/107/0/scale = 1.0
+cache/0/108/0/ascent = 0.0
+cache/0/108/0/descent = 0.0
+cache/0/108/0/underline_position = 0.0
+cache/0/108/0/underline_thickness = 0.0
+cache/0/108/0/scale = 1.0
+cache/0/109/0/ascent = 0.0
+cache/0/109/0/descent = 0.0
+cache/0/109/0/underline_position = 0.0
+cache/0/109/0/underline_thickness = 0.0
+cache/0/109/0/scale = 1.0
+cache/0/110/0/ascent = 0.0
+cache/0/110/0/descent = 0.0
+cache/0/110/0/underline_position = 0.0
+cache/0/110/0/underline_thickness = 0.0
+cache/0/110/0/scale = 1.0
+cache/0/111/0/ascent = 0.0
+cache/0/111/0/descent = 0.0
+cache/0/111/0/underline_position = 0.0
+cache/0/111/0/underline_thickness = 0.0
+cache/0/111/0/scale = 1.0
+cache/0/112/0/ascent = 0.0
+cache/0/112/0/descent = 0.0
+cache/0/112/0/underline_position = 0.0
+cache/0/112/0/underline_thickness = 0.0
+cache/0/112/0/scale = 1.0
+cache/0/113/0/ascent = 0.0
+cache/0/113/0/descent = 0.0
+cache/0/113/0/underline_position = 0.0
+cache/0/113/0/underline_thickness = 0.0
+cache/0/113/0/scale = 1.0
+cache/0/114/0/ascent = 0.0
+cache/0/114/0/descent = 0.0
+cache/0/114/0/underline_position = 0.0
+cache/0/114/0/underline_thickness = 0.0
+cache/0/114/0/scale = 1.0
+cache/0/115/0/ascent = 0.0
+cache/0/115/0/descent = 0.0
+cache/0/115/0/underline_position = 0.0
+cache/0/115/0/underline_thickness = 0.0
+cache/0/115/0/scale = 1.0
+cache/0/116/0/ascent = 0.0
+cache/0/116/0/descent = 0.0
+cache/0/116/0/underline_position = 0.0
+cache/0/116/0/underline_thickness = 0.0
+cache/0/116/0/scale = 1.0
+cache/0/117/0/ascent = 0.0
+cache/0/117/0/descent = 0.0
+cache/0/117/0/underline_position = 0.0
+cache/0/117/0/underline_thickness = 0.0
+cache/0/117/0/scale = 1.0
+cache/0/118/0/ascent = 0.0
+cache/0/118/0/descent = 0.0
+cache/0/118/0/underline_position = 0.0
+cache/0/118/0/underline_thickness = 0.0
+cache/0/118/0/scale = 1.0
+cache/0/119/0/ascent = 0.0
+cache/0/119/0/descent = 0.0
+cache/0/119/0/underline_position = 0.0
+cache/0/119/0/underline_thickness = 0.0
+cache/0/119/0/scale = 1.0
 
 [node name="Main" type="Node" unique_id=1519494960]
 
@@ -150,56 +476,6 @@ shadow_bias = 1.057
 shadow_normal_bias = 2.146
 shadow_blur = 3.535
 
-[node name="Walls" type="Node" parent="." unique_id=1768569498]
-
-[node name="Wall" type="StaticBody3D" parent="Walls" unique_id=1835968874]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 4)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall" unique_id=1599522344]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-shape = SubResource("BoxShape3D_h28t3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall" unique_id=774858920]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-mesh = SubResource("BoxMesh_itduq")
-
-[node name="Wall2" type="StaticBody3D" parent="Walls" unique_id=949152287]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 3)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2" unique_id=1571563963]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-shape = SubResource("BoxShape3D_h28t3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall2" unique_id=739894291]
-transform = Transform3D(1.0002682, 0, 0, 0, 1.0002682, 0, 0, 0, 1.0002682, 0, 0, 1)
-mesh = SubResource("BoxMesh_itduq")
-
-[node name="Wall3" type="StaticBody3D" parent="Walls" unique_id=2109732043]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 4, -6)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3" unique_id=1237764975]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-shape = SubResource("BoxShape3D_h28t3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall3" unique_id=2058982348]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-mesh = SubResource("BoxMesh_itduq")
-
-[node name="Wall4" type="StaticBody3D" parent="Walls" unique_id=1357287766]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 4, 15)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4" unique_id=1998136109]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-shape = SubResource("BoxShape3D_h28t3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall4" unique_id=1529727585]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-mesh = SubResource("BoxMesh_itduq")
-
 [node name="Node" type="Node" parent="." unique_id=575121066]
 
 [node name="Pos1" type="Marker3D" parent="Node" unique_id=742369011]
@@ -235,7 +511,7 @@ collision_mask = 0
 shape = SubResource("BoxShape3D_itduq")
 
 [node name="drawer_screwdriver" parent="." unique_id=357020823 instance=ExtResource("5_yc10j")]
-transform = Transform3D(0.3978382, 0, 0.9174557, 0, 1, 0, -0.9174557, 0, 0.3978382, 3.232346, 0.38764715, 3.359765)
+transform = Transform3D(-0.93592244, 0, 0.3522066, 0, 1, 0, -0.3522066, 0, -0.93592244, -13.55163, 2.3633134, -3.188108)
 
 [node name="Lock" parent="." unique_id=977989371 instance=ExtResource("9_85g3d")]
 transform = Transform3D(-0.8983811, 0, 0.43921697, 0, 1, 0, -0.43921697, 0, -0.8983811, -2.078287, 0.4303015, 5.7800217)
@@ -243,11 +519,12 @@ transform = Transform3D(-0.8983811, 0, 0.43921697, 0, 1, 0, -0.43921697, 0, -0.8
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1596189335]
 environment = SubResource("Environment_choun")
 
-[node name="game_manager" parent="." unique_id=1153036137 node_paths=PackedStringArray("dialogue_window", "basement_lock", "basement_wall_code", "clock_note", "ultraviolet_light", "trophy", "drawer", "laptop", "ring", "projector") instance=ExtResource("10_ya4ey")]
+[node name="game_manager" parent="." unique_id=1153036137 node_paths=PackedStringArray("dialogue_window", "basement_lock", "basement_wall_code", "clock_note", "clock_hint", "ultraviolet_light", "trophy", "drawer", "laptop", "ring", "projector") instance=ExtResource("10_ya4ey")]
 dialogue_window = NodePath("../DialogueWindow")
 basement_lock = NodePath("../Lock")
 basement_wall_code = NodePath("../Table/Label3D")
 clock_note = NodePath("../Note")
+clock_hint = NodePath("../Ultraviolet light/clock_hint")
 ultraviolet_light = NodePath("../Ultraviolet light")
 trophy = NodePath("../trophy")
 drawer = NodePath("../drawer_screwdriver")
@@ -258,7 +535,7 @@ projector = NodePath("../projector")
 [node name="DialogueWindow" parent="." unique_id=1150618293 instance=ExtResource("11_ya4ey")]
 
 [node name="cauldron" parent="." unique_id=1382961925 node_paths=PackedStringArray("dialogue_window", "projector_lens") instance=ExtResource("12_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018258572, 0.3709464, 3.3223176)
+transform = Transform3D(0.67963344, 0, 0.73355186, 0, 1, 0, -0.73355186, 0, 0.67963344, -14.729138, 2.2377932, 0.965781)
 dialogue_window = NodePath("../DialogueWindow")
 post_trophy_message = "Cauldron -Hmm. A trophy. You know it has a name on in. Jessica Denz. Denz. Just as your last name I presume. Ha. Seems like it belong to your own child Marvin. Seems she was quite successful in sport. Pity you can't remember her."
 post_trophy_message2 = "Marvin - What? I had a child. I still don't remember anything. My mind is like a huge ocean. Everything is blurry and my head hurts. Fuck. What is it? You are giving me a projector lens. I wonder where I can use it."
@@ -277,7 +554,7 @@ clock_note = true
 clock = NodePath("../Clock")
 
 [node name="Clock" parent="." unique_id=1584196817 instance=ExtResource("14_a8y0u")]
-transform = Transform3D(-0.9956017, 0, 0.093688376, 0, 1, 0, -0.093688376, 0, -0.9956017, -0.50860536, 1.303453, 7.544565)
+transform = Transform3D(-0.9956017, 0, 0.093688376, 0, 1, 0, -0.093688376, 0, -0.9956017, -14.06032, 2.9476628, 4.5317307)
 
 [node name="ClockPositions" type="Node" parent="." unique_id=232747838]
 
@@ -291,61 +568,105 @@ transform = Transform3D(-0.8604371, 0, -0.5095567, 0, 1, 0, 0.5095567, 0, -0.860
 transform = Transform3D(-0.9128815, 0, 0.4082246, 0, 1, 0, -0.4082246, 0, -0.9128815, -2.1473117, 0, 7.3546486)
 
 [node name="arcade" parent="." unique_id=687750121 instance=ExtResource("14_jkv2x")]
-transform = Transform3D(0.9281236, 0, -0.37227222, 0, 1, 0, 0.37227222, 0, 0.9281236, 2.328858, 1.3070227, -0.18477845)
+transform = Transform3D(-0.9223859, 0, -0.3862695, 0, 1, 0, 0.3862695, 0, -0.9223859, -11.088835, 3.093482, 4.9667244)
 
 [node name="projector" parent="." unique_id=1362817375 instance=ExtResource("15_jkv2x")]
-transform = Transform3D(0.75683016, 0, 0.6536116, 0, 1, 0, -0.6536116, 0, 0.75683016, -1.5473872, 0.95107174, -0.24603474)
+transform = Transform3D(-0.2706297, 0, -0.96268356, 0, 1, 0, 0.96268356, 0, -0.2706297, -10.525067, 3.0625534, 1.3975365)
 
-[node name="Ultraviolet" parent="." unique_id=436189127 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8605293, 0.18092203, 1.6282437)
+[node name="Ultraviolet" parent="." unique_id=436189127 node_paths=PackedStringArray("spawn_points") instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.57555, 2.3245318, -1.589402)
 data = ExtResource("16_jbj1t")
+spawn_points = [NodePath("../ultraviolet_random_pos/pos1"), NodePath("../ultraviolet_random_pos/pos2"), NodePath("../ultraviolet_random_pos/pos3")]
+
+[node name="ultraviolet_random_pos" type="Node" parent="." unique_id=821459054]
+
+[node name="pos1" type="Marker3D" parent="ultraviolet_random_pos" unique_id=1429038518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.940706, 2.1446967, -1.7450709)
+
+[node name="pos2" type="Marker3D" parent="ultraviolet_random_pos" unique_id=1225114475]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.940706, 2.516909, -3.052979)
+
+[node name="pos3" type="Marker3D" parent="ultraviolet_random_pos" unique_id=505394007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.002787, 3.0149941, -3.1435754)
 
 [node name="put_ultraviolet" parent="." unique_id=630877354 instance=ExtResource("17_muem4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8371685, 0, 2.5312314)
+transform = Transform3D(0.14106104, 0, 0.9900009, 0, 1, 0, -0.9900009, 0, 0.14106104, -18.142809, 3.0943432, 1.7344362)
 
 [node name="Ultraviolet light" type="OmniLight3D" parent="." unique_id=767906393]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0791953, 1.5199195, 2.5312314)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.114424, 3.482259, 1.7615147)
 light_color = Color(1, 0, 1, 1)
 light_energy = 12.307
 
+[node name="clock_hint" type="Label3D" parent="Ultraviolet light" unique_id=1220806821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.046131134, 0.38386607, -0.5635886)
+shaded = true
+alpha_scissor_threshold = 0.296
+modulate = Color(0.326184, 0.326184, 0.32618397, 1)
+text = "6:35"
+font = SubResource("FontFile_oxmgc")
+font_size = 109
+outline_size = 0
+line_spacing = 0.62
+
 [node name="statue" parent="." unique_id=1026831072 instance=ExtResource("18_dp3eg")]
-transform = Transform3D(-0.51106477, 0, 0.8595422, 0, 1, 0, -0.8595422, 0, -0.51106477, 2.8536103, 0.71369743, 1.5128565)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.948065, 2.7349064, 10.667917)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="statue" unique_id=774183609]
+transform = Transform3D(1, 0, 0, 0, -0.5816371, 0.8134484, 0, -0.8134484, -0.5816371, 0, 1.4939015, -1.8132792)
+light_color = Color(0.9028214, 0.40782923, 0.51105857, 1)
+light_energy = 5.246
+spot_range = 7.435221
 
 [node name="trophy" parent="." unique_id=2135029797 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0234573, 0.4624048, 0.5553384)
+transform = Transform3D(-0.71229076, 0, -0.7018845, 0, 1, 0, 0.7018845, 0, -0.71229076, -11.390778, 2.248864, 4.22519)
 data = ExtResource("19_0ld40")
 
+[node name="statue_head" parent="." unique_id=2060175922 node_paths=PackedStringArray("spawn_points") instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.393096, 2.9007103, 2.0645702)
+data = ExtResource("20_yq6so")
+spawn_points = [NodePath("../statue_head_random_pos/pos1"), NodePath("../statue_head_random_pos/pos2")]
+
+[node name="statue_head_random_pos" type="Node" parent="." unique_id=1337492913]
+
+[node name="pos1" type="Marker3D" parent="statue_head_random_pos" unique_id=757610253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.583255, 2.75955, 1.653665)
+
+[node name="pos2" type="Marker3D" parent="statue_head_random_pos" unique_id=1373914428]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.111818, 1.868267, 3.2544918)
+
 [node name="projector_lens" parent="." unique_id=1903909788 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3025964, 0.32061994, 2.1996794)
+transform = Transform3D(0.67963344, 0, 0.73355186, 0, 1, 0, -0.73355186, 0, 0.67963344, -15.359406, 2.1874666, -0.0057774186)
 data = ExtResource("20_gqmmt")
 
 [node name="screwdriver" parent="." unique_id=147958643 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27426326, 0.23166358, 5.340823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.490911, 2.0175724, -1.1956077)
 data = ExtResource("21_yc10j")
 
 [node name="laptop" parent="." unique_id=1090818326 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1129117, 0.23593044, 3.9294643)
+transform = Transform3D(-0.9531074, 0, -0.30263236, 0, 1, 0, 0.30263236, 0, -0.9531074, -14.148899, 2.0623138, -2.5354147)
 data = ExtResource("22_jscy8")
 
-[node name="cable" parent="." unique_id=741307282 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22911334, -1.5421511)
-data = ExtResource("23_pm3ni")
-
 [node name="put_lens" parent="." unique_id=397678532 instance=ExtResource("24_2wyq8")]
-transform = Transform3D(-0.9515918, 0, -0.30736512, 0, 1, 0, 0.30736512, 0, -0.9515918, -1.5120199, 0.47496307, -2.9872897)
+transform = Transform3D(0.48840296, 0, -0.8726183, 0, 1, 0, 0.8726183, 0, 0.48840296, -18.463997, 2.320238, 4.178111)
 
 [node name="put_cable" parent="." unique_id=909094064 instance=ExtResource("25_vxglm")]
-transform = Transform3D(-0.98202413, 0, 0.18875581, 0, 1, 0, -0.18875581, 0, -0.98202413, 0.12269294, 0.47496307, -2.9872897)
+transform = Transform3D(0.7469436, -0.012751808, -0.6647651, 0.020534532, 0.9997814, 0.0038947975, 0.6645703, -0.016559826, 0.74704224, -17.939465, 2.320238, 5.0005503)
 
 [node name="put_laptop" parent="." unique_id=140950738 instance=ExtResource("26_2f3dj")]
-transform = Transform3D(-0.82816476, 0, 0.56048495, 0, 1, 0, -0.56048495, 0, -0.82816476, 1.6763223, 0.53590167, -2.792952)
+transform = Transform3D(0.5996264, 0, -0.8002802, 0, 1, 0, 0.8002802, 0, 0.5996264, -18.443483, 3.272593, 4.7918434)
 
 [node name="ring" parent="." unique_id=453737541 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0175958, 0.19759184, 0.35954767)
+transform = Transform3D(-0.83404183, 0, -0.5517012, 0, 1, 0, 0.5517012, 0, -0.83404183, -11.301037, 2.3090734, 1.184743)
 data = ExtResource("27_vxglm")
 
 [node name="basement" parent="." unique_id=2085374678 instance=ExtResource("28_2f3dj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.390637, 2.4566739, 0.48828685)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3905945, 2.4566739, 0.49110568)
+
+[node name="cable" parent="." unique_id=15023643 instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.333328, 4.815078, -2.6591334)
+data = ExtResource("23_pm3ni")
+
+[node name="cable_random_pos" type="Node" parent="." unique_id=1036005978]
 
 [connection signal="item_put" from="drawer_screwdriver" to="game_manager" method="_on_drawer_screwdriver_item_put"]
 [connection signal="lock_opened" from="Lock" to="game_manager" method="_on_lock_lock_opened"]
