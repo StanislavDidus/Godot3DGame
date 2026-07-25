@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="item_data" format=3 uid="uid://drytetm5swxp2"]
+
+[ext_resource type="Script" uid="uid://cabhd2pny84yq" path="res://scenes/item_data.gd" id="1_x2fkg"]
+
+[resource]
+script = ExtResource("1_x2fkg")
+item_name = "screwdriver"
+metadata/_custom_type_script = "uid://cabhd2pny84yq"

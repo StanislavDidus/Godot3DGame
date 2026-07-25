@@ -28,7 +28,9 @@ enum PLAYER_STATE
 	WALK,
 	CROUCH,
 	LOCK_PICK,
-	CLOCK_PICK
+	CLOCK_PICK,
+	MAZE,
+	PROJECTOR
 }
 
 # Camera shake properties
@@ -50,6 +52,8 @@ var crouch_tween: Tween
 
 var lock
 var clock
+var maze
+var projector
 
 func _unhandled_input(event: InputEvent) -> void:
 
@@ -103,6 +107,7 @@ func interact():
 	
 	var can_interact = false;
 	for item in all_items:
+		#print(item.name)
 		var items_vector = item.position - position
 		var camera_vector = -$Camera.get_global_transform().basis.z
 		
@@ -165,6 +170,12 @@ func on_enter_state(state):
 			interaction_label.hide()
 			camera_transform_before_lock = $Camera.transform
 		PLAYER_STATE.CLOCK_PICK:
+			interaction_label.hide()
+			camera_transform_before_lock = $Camera.transform
+		PLAYER_STATE.MAZE:
+			interaction_label.hide()
+			camera_transform_before_lock = $Camera.transform
+		PLAYER_STATE.PROJECTOR:
 			interaction_label.hide()
 			camera_transform_before_lock = $Camera.transform
 	
@@ -273,6 +284,24 @@ func on_update_state(state, delta):
 				
 				if !clock.is_active:
 					set_state(PLAYER_STATE.IDLE)
+		PLAYER_STATE.MAZE:
+			if Input.is_action_just_pressed("stop_lock_pick"):
+				set_state(PLAYER_STATE.WALK)
+				
+			if maze != null:
+				maze.update()
+				
+				if !maze.is_active:
+					set_state(PLAYER_STATE.IDLE)
+		PLAYER_STATE.PROJECTOR:
+			if Input.is_action_just_pressed("stop_lock_pick"):
+				set_state(PLAYER_STATE.WALK)
+				
+			if projector != null:
+				projector.update()
+				
+				if !projector.is_active:
+					set_state(PLAYER_STATE.IDLE)
 	
 func on_exit_state(state):
 	match state:
@@ -288,6 +317,12 @@ func on_exit_state(state):
 		PLAYER_STATE.CLOCK_PICK:
 			$Camera.transform = camera_transform_before_lock
 			clock = null
+		PLAYER_STATE.MAZE:
+			$Camera.transform = camera_transform_before_lock
+			maze = null
+		PLAYER_STATE.PROJECTOR:
+			$Camera.transform = camera_transform_before_lock
+			projector = null
 
 func _on_ray_cast_3d_hit_item() -> void:
 	looking_at_item = true

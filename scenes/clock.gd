@@ -6,6 +6,8 @@ signal clock_opened
 @export var big_arrow_solution = 0
 @export var small_arrow_solution = 0
 
+@export var positions: Array[Marker3D]
+
 var big_arrow_position = 0
 var small_arrow_position = 0
 
@@ -13,6 +15,15 @@ var is_big_arrow_active = true # False then small arrow
 
 var is_open = false
 var is_active = true
+
+
+func randomize():
+	if positions.is_empty(): return
+	var pos = positions[randi() % positions.size()]
+	
+	position = pos.position
+	position.y += $MeshInstance3D.get_aabb().size.y * 0.5
+	rotation = pos.rotation
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,6 +59,10 @@ func update():
 				is_open = true
 				is_active = false
 				clock_opened.emit(clock_name)
+				
+				# Move clock away
+				var tween = create_tween()
+				tween.tween_property(self, "position", position + Vector3(-1.3, 0, 0), 3.5)
 	
 func interact(player):
 	player.clock = self

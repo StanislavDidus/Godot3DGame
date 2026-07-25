@@ -29,9 +29,10 @@ func interact(player):
 				
 			# Spawn Object in the marker position
 			if spawn_item:
-				var model_instance = equipped_item.model.instantiate()
-				model_instance.scale = equipped_item.model_scale
-				get_node("Marker").add_child(model_instance)
+				if equipped_item.model != null:
+					var model_instance = equipped_item.model.instantiate()
+					model_instance.scale = equipped_item.model_scale
+					get_node("Marker").add_child(model_instance)
 				
 			is_active = false
 			item_put.emit(put_item_name)

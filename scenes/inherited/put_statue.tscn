@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://d0lj0uom2cr2i"]
+
+[ext_resource type="PackedScene" uid="uid://dwvk7epror4gu" path="res://scenes/put_item.tscn" id="1_luaeo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_luaeo"]
+size = Vector3(0.8, 1.7, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h28t3"]
+albedo_color = Color(0.6745098, 0, 0.039215688, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ex8wu"]
+material = SubResource("StandardMaterial3D_h28t3")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_luaeo"]
+radius = 0.24833931
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pv08a"]
+size = Vector3(0.8, 1.7, 0.8)
+
+[node name="statue" unique_id=357020823 instance=ExtResource("1_luaeo")]
+item_name = "statue_head"
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=298907454]
+mesh = SubResource("BoxMesh_luaeo")
+
+[node name="Marker" parent="." index="1" unique_id=1879724888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7636171, -0.39847636)
+
+[node name="MeshInstance3D" parent="Marker" index="0" unique_id=2102503704]
+mesh = SubResource("BoxMesh_ex8wu")
+
+[node name="CollisionShape3D" parent="Marker" index="1" unique_id=759677535]
+shape = SubResource("SphereShape3D_luaeo")
+
+[node name="CollisionShape3D" parent="." index="2" unique_id=2087258195]
+shape = SubResource("BoxShape3D_pv08a")
