@@ -6,6 +6,7 @@ extends Node
 @export var basement_wall_code: Label3D
 
 @export var clock_note: Node3D
+@export var clock_hint: Node3D
 
 @export var ultraviolet_light: Node3D
 
@@ -53,6 +54,8 @@ func init(): # Randomize function
 	ring.is_active = false
 	ring.hide()
 	
+	clock_hint.hide()
+	
 
 func _ready() -> void:
 	init()
@@ -78,7 +81,7 @@ func _on_put_item_item_put(name: String) -> void:
 
 
 func _on_put_ultraviolet_item_put(name: String) -> void:
-	print("Ultraviolet put")
+	clock_hint.show()
 	ultraviolet_light.show()
 
 

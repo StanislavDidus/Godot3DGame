@@ -15,7 +15,7 @@ size = Vector3(0.8282242, 0.7760544, 0.9055176)
 
 [node name="Item" type="RigidBody3D" unique_id=436189127 groups=["interactable", "items"]]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 3
 mass = 3.0
 script = ExtResource("1_4gq7n")
 
