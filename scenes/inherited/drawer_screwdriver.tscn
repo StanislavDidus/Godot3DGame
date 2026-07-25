@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://dqjqg6whfs5ey"]
+
+[ext_resource type="PackedScene" uid="uid://dwvk7epror4gu" path="res://scenes/put_item.tscn" id="1_0kx20"]
+[ext_resource type="PackedScene" uid="uid://863n4y0fhcc6" path="res://scenes/item.tscn" id="2_oqk5h"]
+[ext_resource type="Resource" uid="uid://btthk6dk3662y" path="res://prefabs/laptop.tres" id="3_h2jt0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oxmgc"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_itduq"]
+size = Vector3(1, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gnwv2"]
+size = Vector3(0.19, 0.37, 1)
+
+[node name="drawer_screwdriver" unique_id=357020823 instance=ExtResource("1_0kx20")]
+spawn_item = false
+use_item = false
+put_item_name = "drawer_screwdriver"
+item_name = "screwdriver"
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=298907454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3556363, 0)
+
+[node name="Marker" parent="." index="1" unique_id=1879724888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49690264, -0.5354007)
+
+[node name="CollisionShape3D" parent="." index="2" unique_id=2087258195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3556363, 0)
+
+[node name="drawer" type="Node3D" parent="." index="3" unique_id=959009633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1977922)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="StaticBody3D" parent="drawer" index="0" unique_id=2082301588]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.46240234, -1.2113127)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="drawer/MeshInstance3D2" index="0" unique_id=721201981]
+shape = SubResource("BoxShape3D_oxmgc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="drawer/MeshInstance3D2" index="1" unique_id=348853092]
+mesh = SubResource("BoxMesh_itduq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="drawer" index="1" unique_id=1138916124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40614152, -0.2733404, -1.2343909)
+mesh = SubResource("BoxMesh_gnwv2")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="drawer" index="2" unique_id=1567969828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40694082, -0.2733404, -1.2343909)
+mesh = SubResource("BoxMesh_gnwv2")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="drawer" index="3" unique_id=42270704]
+transform = Transform3D(0.034784116, 0, -0.99939483, 0, 1, 0, 0.99939483, 0, 0.034784116, -0.028388768, -0.19947028, -1.6714758)
+mesh = SubResource("BoxMesh_gnwv2")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="drawer" index="4" unique_id=145701729]
+transform = Transform3D(0.034784116, 0, -0.99939483, 0, 1, 0, 0.99939483, 0, 0.034784116, -0.028388768, -0.19947028, -0.83538246)
+mesh = SubResource("BoxMesh_gnwv2")
+
+[node name="laptop" parent="drawer" index="5" unique_id=436189127 instance=ExtResource("2_oqk5h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26039904, -1.2780359)
+data = ExtResource("3_h2jt0")

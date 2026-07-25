@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cui6mtftdh5d5"]
+
+[ext_resource type="PackedScene" uid="uid://dwvk7epror4gu" path="res://scenes/put_item.tscn" id="1_oakib"]
+
+[node name="put_cable" unique_id=357020823 instance=ExtResource("1_oakib")]
+put_item_name = "cable"
+item_name = "cable"

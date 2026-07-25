@@ -15,8 +15,8 @@ func init():
 			var model = data.model.instantiate()
 			add_child(model)
 			model.scale = data.model_scale
-		else:
-			$MeshInstance3D.hide()
+		#else:
+			#$MeshInstance3D.hide()
 		
 	data.item_scene = duplicate()
 # Called when the node enters the scene tree for the first time.
@@ -24,6 +24,7 @@ func _ready() -> void:
 	init()
 
 func random_spawn():
+	if spawn_points.is_empty(): return
 	var rand = randi() % spawn_points.size()
 	position = spawn_points[rand].global_position
 
@@ -32,7 +33,8 @@ func interact(player):
 		player.active_item = data
 		queue_free()		
 		
-		var item = data.model.instantiate()
-		item.scale = data.model_scale
-		player.get_node("Camera/HandPivot").add_child(item)
+		if data.model != null:
+			var item = data.model.instantiate()
+			item.scale = data.model_scale
+			player.get_node("Camera/HandPivot").add_child(item)
 		

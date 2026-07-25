@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://li8f7hiocm3s"]
+
+[ext_resource type="Texture2D" uid="uid://i7dssthrmkjh" path="res://assets/sprites/arcade_board.png" id="1_pig0t"]
+[ext_resource type="Script" uid="uid://de6gkcng8vb2b" path="res://scenes/arcade.gd" id="2_24fbm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oxmgc"]
+size = Vector3(1, 1.8242188, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_me10n"]
+size = Vector3(1, 1.0651855, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_adccw"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_24fbm"]
+material = SubResource("StandardMaterial3D_adccw")
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pig0t"]
+albedo_color = Color(1, 1, 0.3882353, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r0kxb"]
+material = SubResource("StandardMaterial3D_pig0t")
+size = Vector3(0.07, 0.07, 0.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_me10n"]
+albedo_color = Color(0.42745098, 1, 0.3882353, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wer3u"]
+material = SubResource("StandardMaterial3D_me10n")
+size = Vector3(0.07, 0.07, 0.07)
+
+[node name="arcade" type="StaticBody3D" unique_id=1584196817 groups=["interactable", "objects"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_24fbm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=60032371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.33789063, 0)
+shape = SubResource("BoxShape3D_oxmgc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=297517712]
+transform = Transform3D(1, 0, 0, 0, 1.7095883, 0, 0, 0, 1, 0, -0.33569336, 0)
+mesh = SubResource("BoxMesh_me10n")
+
+[node name="LookAt" type="Node3D" parent="." unique_id=1844482216]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23406124, 0.6656136)
+
+[node name="Screen" type="Node3D" parent="." unique_id=1869295781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23669392, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Screen" unique_id=197602918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36199176, 0.12160921)
+mesh = SubResource("BoxMesh_24fbm")
+
+[node name="Sprite3D" type="Sprite3D" parent="Screen" unique_id=1651763793]
+transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 2.07, 0, 0.36339247, 0.5263946)
+texture = ExtResource("1_pig0t")
+
+[node name="Figure" type="MeshInstance3D" parent="Screen" unique_id=136708677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246727, 0.6180895, 0.5603164)
+mesh = SubResource("BoxMesh_r0kxb")
+
+[node name="Finish" type="MeshInstance3D" parent="Screen" unique_id=1617521326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2102726, 0.26336443, 0.53494036)
+mesh = SubResource("BoxMesh_wer3u")

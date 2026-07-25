@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cyfcjrgoqdpxo"]
+
+[ext_resource type="PackedScene" uid="uid://dwvk7epror4gu" path="res://scenes/put_item.tscn" id="1_wa18n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_52twn"]
+size = Vector3(0.5, 0.5, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x1cl0"]
+albedo_color = Color(0.58481926, 0.067941576, 0.5328936, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6cc4w"]
+material = SubResource("StandardMaterial3D_x1cl0")
+size = Vector3(0.41308594, 0.31311035, 0.38757324)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wa18n"]
+size = Vector3(0.5, 0.5, 0.3)
+
+[node name="put_ultraviolet" unique_id=357020823 instance=ExtResource("1_wa18n")]
+put_item_name = "Ultraviolet"
+item_name = "Ultraviolet"
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=298907454]
+mesh = SubResource("BoxMesh_52twn")
+
+[node name="MeshInstance3D" parent="Marker" parent_id_path=PackedInt32Array(1879724888) index="0" unique_id=2102503704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010582089, 0.19021916, 0.5816052)
+mesh = SubResource("BoxMesh_6cc4w")
+
+[node name="CollisionShape3D" parent="." index="2" unique_id=2087258195]
+shape = SubResource("BoxShape3D_wa18n")

@@ -6,6 +6,8 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oxmgc"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oxmgc"]
+radius = 0.25
+height = 0.5
 
 [node name="Player" type="CharacterBody3D" unique_id=619208955]
 collision_mask = 2
