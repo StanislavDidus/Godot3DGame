@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @export var data: item_data
 
-@export var spawn_points: Array[Marker3D]
+#@export var spawn_points: Array[Marker3D]
 
 var is_active = true
 
@@ -15,6 +15,7 @@ func init():
 			var model = data.model.instantiate()
 			add_child(model)
 			model.scale = data.model_scale
+			$MeshInstance3D.hide()
 		#else:
 			#$MeshInstance3D.hide()
 		
@@ -24,14 +25,17 @@ func _ready() -> void:
 	init()
 
 func random_spawn():
-	if spawn_points.is_empty(): return
-	var rand = randi() % spawn_points.size()
-	position = spawn_points[rand].global_position
+	#if spawn_points.is_empty(): return
+	#var rand = randi() % spawn_points.size()
+	#position = spawn_points[rand].global_position
+	pass
 
 func interact(player):
 	if player.active_item == null:
 		player.active_item = data
 		queue_free()		
+		
+		player.get_node("pick_up").play()
 		
 		if data.model != null:
 			var item = data.model.instantiate()

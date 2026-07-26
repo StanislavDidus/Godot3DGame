@@ -75,6 +75,7 @@ func drop_item():
 	if active_item != null and active_item.item_scene != null and drop_item != null:
 		var item_to_drop = active_item
 		
+		$drop_item.play()
 		#var dropped_item = active_item.item_scene.instantiate()
 		var dropped_item = load("res://scenes/item.tscn").instantiate()
 		#print(dropped_item.get_script())
@@ -104,27 +105,37 @@ func set_crouch(is_crouching: bool) -> void:
 	
 func interact():
 	var all_items = get_tree().get_nodes_in_group("interactable")
-	
-	var can_interact = false;
+
+	var best_item = null
+	var best_dot = -1.0
+
+	var camera_forward = -$Camera.global_transform.basis.z
+
 	for item in all_items:
-		#print(item.name)
-		var items_vector = item.position - position
-		var camera_vector = -$Camera.get_global_transform().basis.z
-		
-		if items_vector.dot(camera_vector) >= cos(deg_to_rad(interaction_angle)):
-			if items_vector.length() <= interaction_distance:
-				if looking_at_item:
-					if item.is_active:
-						interaction_label.show()
-						can_interact = true
-						
-						if Input.is_action_just_pressed("interact"):
-							item.interact(self)
-							break
-					
-				
-	if !can_interact:
+		if !item.is_active:
+			continue
+
+		var to_item = (item.global_position - $Camera.global_position).normalized()
+		var dot = camera_forward.dot(to_item)
+
+		if dot < cos(deg_to_rad(interaction_angle)):
+			continue
+
+		if $Camera.global_position.distance_to(item.global_position) > interaction_distance:
+			continue
+
+		if dot > best_dot:
+			best_dot = dot
+			best_item = item
+
+	if best_item != null:
+		interaction_label.show()
+
+		if Input.is_action_just_pressed("interact"):
+			best_item.interact(self)
+	else:
 		interaction_label.hide()
+
 		
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -140,6 +151,9 @@ func move_camera(delta: float):
 
 func _process(delta: float) -> void:
 	looking_at_item = false
+	
+	if $breathing_sound.playing == false:
+		$breathing_sound.play()
 
 func _physics_process(delta: float) -> void:
 	timer += delta * camera_shake_speed
@@ -248,6 +262,9 @@ func on_update_state(state, delta):
 			velocity.y -= delta * gravity
 			move_and_slide()
 			
+			if !$walk_sound.playing:
+				$walk_sound.play()
+			
 			$Camera.position.y = camera_origin_position.y + camera_shake_amplitude * sin(slow_timer)
 			
 			if Input.is_action_just_pressed("drop_item"):
@@ -263,8 +280,8 @@ func on_update_state(state, delta):
 			move_camera(delta)
 			interact()
 			
-			velocity.y -= delta * gravity
-			move_and_slide()
+			#velocity.y -= delta * gravity
+			#move_and_slide()
 				
 		PLAYER_STATE.LOCK_PICK:
 			if Input.is_action_just_pressed("stop_lock_pick"):
@@ -308,7 +325,7 @@ func on_exit_state(state):
 		PLAYER_STATE.IDLE:
 			pass
 		PLAYER_STATE.WALK:
-			pass
+			$walk_sound.stop()
 		PLAYER_STATE.CROUCH:
 			set_crouch(false)
 		PLAYER_STATE.LOCK_PICK:

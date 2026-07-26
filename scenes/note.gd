@@ -44,4 +44,3 @@ func _process(delta: float) -> void:
 	
 func interact(player):
 	dialogue_window.show_message(text, duration)
-

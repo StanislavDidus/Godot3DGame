@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_goq6v")
 item_name = "laptop"
+randomize_pos = false
 metadata/_custom_type_script = "uid://cabhd2pny84yq"

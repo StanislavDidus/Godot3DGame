@@ -1,15 +1,8 @@
 [gd_scene format=3 uid="uid://bqa0ordccf076"]
 
 [ext_resource type="Script" uid="uid://bf7vvpx5u5y5d" path="res://scenes/cauldron.gd" id="1_bi80w"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trceg"]
-albedo_color = Color(0, 0.54509807, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_oxmgc"]
-material = SubResource("StandardMaterial3D_trceg")
-top_radius = 0.75
-bottom_radius = 0.75
-height = 0.75
+[ext_resource type="PackedScene" uid="uid://ftlmrhy4jrtx" path="res://assets/models/blender/Cauldron.glb" id="2_8jqlm"]
+[ext_resource type="AudioStream" uid="uid://cnp8sp4xd8e0k" path="res://assets/sounds/BubblingCauldron.mp3" id="3_l3ke8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_oxmgc"]
 height = 0.75
@@ -20,10 +13,6 @@ collision_layer = 6
 collision_mask = 0
 script = ExtResource("1_bi80w")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1906636332]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013843328, 0)
-mesh = SubResource("CylinderMesh_oxmgc")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=925989671]
 shape = SubResource("CylinderShape3D_oxmgc")
 
@@ -31,4 +20,17 @@ shape = SubResource("CylinderShape3D_oxmgc")
 wait_time = 5.0
 one_shot = true
 
+[node name="Cauldron" parent="." unique_id=56054191 instance=ExtResource("2_8jqlm")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 1.6573675, 0.016166806, -0.45226473)
+
+[node name="bubbling" type="AudioStreamPlayer3D" parent="." unique_id=933440208]
+stream = ExtResource("3_l3ke8")
+volume_db = -3.011
+max_distance = 2.5
+
+[node name="finish_timer" type="Timer" parent="." unique_id=67183132]
+wait_time = 60.0
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="finish_timer" to="." method="_on_finish_timer_timeout"]

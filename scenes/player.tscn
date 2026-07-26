@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cmb22g7cv1vkd" path="res://scenes/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://b5gcsrwbtsnkl" path="res://scenes/ray_cast_3d.gd" id="2_g2els"]
+[ext_resource type="AudioStream" uid="uid://bnr2m6yj3tvxt" path="res://assets/sounds/Breathing.mp3" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://bp7prvw1opnvq" path="res://assets/sounds/Steps1.wav" id="4_dqkch"]
+[ext_resource type="AudioStream" uid="uid://cc4qfc0qhdoiu" path="res://assets/sounds/Pick Up.mp3" id="5_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://cnst8fpmaqegx" path="res://assets/sounds/Drop.mp3" id="6_tuyoq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oxmgc"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_oxmgc"]
-radius = 0.25
-height = 0.5
 
 [node name="Player" type="CharacterBody3D" unique_id=619208955]
 collision_mask = 2
@@ -19,9 +19,6 @@ camera_shake_speed = 9.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1809476910]
 shape = SubResource("CapsuleShape3D_oxmgc")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=673742668]
-mesh = SubResource("CapsuleMesh_oxmgc")
 
 [node name="Camera" type="Camera3D" parent="." unique_id=694365322]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6094731, 0)
@@ -37,6 +34,19 @@ script = ExtResource("2_g2els")
 [node name="OpenInventoryTimer" type="Timer" parent="." unique_id=532693762]
 wait_time = 2.5
 one_shot = true
+
+[node name="breathing_sound" type="AudioStreamPlayer" parent="." unique_id=2054699809]
+stream = ExtResource("3_qhqgy")
+autoplay = true
+
+[node name="walk_sound" type="AudioStreamPlayer" parent="." unique_id=134786321]
+stream = ExtResource("4_dqkch")
+
+[node name="pick_up" type="AudioStreamPlayer" parent="." unique_id=1205718463]
+stream = ExtResource("5_qlg0r")
+
+[node name="drop_item" type="AudioStreamPlayer" parent="." unique_id=1279490953]
+stream = ExtResource("6_tuyoq")
 
 [connection signal="hit_item" from="Camera/RayCast3D" to="." method="_on_ray_cast_3d_hit_item"]
 [connection signal="timeout" from="OpenInventoryTimer" to="." method="_on_open_inventory_timer_timeout"]

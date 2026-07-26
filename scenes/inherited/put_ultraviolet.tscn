@@ -28,3 +28,8 @@ mesh = SubResource("BoxMesh_6cc4w")
 
 [node name="CollisionShape3D" parent="." index="2" unique_id=2087258195]
 shape = SubResource("BoxShape3D_wa18n")
+
+[node name="Marker3D" type="Marker3D" parent="." index="3" unique_id=206553038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4638188, 0)
+
+[node name="Marker3D2" type="Marker3D" parent="." index="4" unique_id=2053137888]

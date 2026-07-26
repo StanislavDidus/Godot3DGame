@@ -9,23 +9,27 @@ var is_active = true
 
 @export var post_ring_message: String
 @export var post_ring_message2: String
+@export var post_ring_message3: String
 
 var hints: Array[String] = [
-	"Hint 1", "Hint 2", "Hint 3"
+	"I think you could use ultraviolet torch to light so area.", "It seems like the statue lacks the head.", "You need to turn on the projector by finding its 3 peaces."
 ]
 
-
+signal finish_game
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	projector_lens.hide()
 	projector_lens.is_active = false
+	
+	dialogue_window.show_message("Hi stranger. Yes I am a Cauldron talking to you. Don't worry if you dont understand where you are. I would just like you to bring me an item. Find a trophy in the room and bring it to me.", 10)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-	
+	if $bubbling.playing == false:
+		$bubbling.play()
+		
 func interact(player):
 
 	if player.active_item != null:
@@ -44,6 +48,9 @@ func interact(player):
 			player.remove_item_in_hand()
 			dialogue_window.show_message(post_ring_message, 15.0)
 			dialogue_window.show_message(post_ring_message2, 15.0)
+			dialogue_window.show_message(post_ring_message3, 15.0)
+			
+			$finish_timer.start()
 			#projector_lens.show()
 			#projector_lens.is_active = true
 			return
@@ -59,3 +66,7 @@ func interact(player):
 
 func _on_timer_timeout() -> void:
 	is_active = true
+
+
+func _on_finish_timer_timeout() -> void:
+	finish_game.emit()

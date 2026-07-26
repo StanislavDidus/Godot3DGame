@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c2m86yy7b1uln"]
+
+[ext_resource type="PackedScene" uid="uid://cedjv7sbiggia" path="res://assets/models/Demon_head.glb" id="1_pnra3"]
+
+[node name="Demon_head" unique_id=200360891 instance=ExtResource("1_pnra3")]
+
+[node name="Demon_001" parent="." index="0" unique_id=216068097]
+transform = Transform3D(0.0024970942, 0, -0.0024970954, 0, 0.0035314255, 0, 0.0024970954, 0, 0.0024970942, 0, -0.4394322, 0)

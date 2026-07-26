@@ -29,36 +29,42 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0014650524, 0.1835475, 0.35
 
 [node name="Number0" type="Label3D" parent="." unique_id=1982713506]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28696284, 0.12887603, 0.306268)
+shaded = true
 text = "0
 "
 font_size = 27
 
 [node name="Number1" type="Label3D" parent="." unique_id=1479654715]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17364147, 0.12887603, 0.306268)
+shaded = true
 text = "0
 "
 font_size = 27
 
 [node name="Number2" type="Label3D" parent="." unique_id=1479442064]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04983817, 0.12887603, 0.306268)
+shaded = true
 text = "0
 "
 font_size = 27
 
 [node name="Number3" type="Label3D" parent="." unique_id=2114017090]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06603426, 0.12887603, 0.306268)
+shaded = true
 text = "0
 "
 font_size = 27
 
 [node name="Number4" type="Label3D" parent="." unique_id=2103757018]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18595308, 0.12887603, 0.306268)
+shaded = true
 text = "0
 "
 font_size = 27
 
 [node name="Number5" type="Label3D" parent="." unique_id=449729254]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29859498, 0.12887603, 0.306268)
+shaded = true
 text = "0
 "
 font_size = 27

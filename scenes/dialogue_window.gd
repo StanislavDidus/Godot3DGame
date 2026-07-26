@@ -41,4 +41,9 @@ func _process(delta: float) -> void:
 		$ColorRect.hide()
 		messages.remove_at(0)
 	
+	if Input.is_action_just_pressed("close_dialogue"):
+		messages.clear()
+		timer = 0.0
+		$Label.text = ""
+		$ColorRect.hide()
 	

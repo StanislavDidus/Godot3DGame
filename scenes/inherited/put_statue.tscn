@@ -1,37 +1,31 @@
 [gd_scene format=3 uid="uid://d0lj0uom2cr2i"]
 
-[ext_resource type="PackedScene" uid="uid://dwvk7epror4gu" path="res://scenes/put_item.tscn" id="1_luaeo"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_luaeo"]
-size = Vector3(0.8, 1.7, 0.8)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h28t3"]
-albedo_color = Color(0.6745098, 0, 0.039215688, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ex8wu"]
-material = SubResource("StandardMaterial3D_h28t3")
-size = Vector3(0.5, 0.5, 0.5)
+[ext_resource type="Script" uid="uid://y5vn6sal7kc5" path="res://scenes/put_item.gd" id="1_ex8wu"]
+[ext_resource type="PackedScene" uid="uid://mo5u1negwaul" path="res://assets/models/demon_statue.glb" id="2_ex8wu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_luaeo"]
 radius = 0.24833931
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pv08a"]
-size = Vector3(0.8, 1.7, 0.8)
+size = Vector3(0.8, 1.7, 0.8291992)
 
-[node name="statue" unique_id=357020823 instance=ExtResource("1_luaeo")]
+[node name="statue" type="StaticBody3D" unique_id=357020823 node_paths=PackedStringArray("item_position") groups=["interactable"]]
+collision_layer = 5
+script = ExtResource("1_ex8wu")
+put_item_name = "Statue"
+item_position = NodePath("Marker")
 item_name = "statue_head"
 
-[node name="MeshInstance3D" parent="." index="0" unique_id=298907454]
-mesh = SubResource("BoxMesh_luaeo")
+[node name="Marker" type="StaticBody3D" parent="." unique_id=1879724888]
+transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 0.07175487, 1.0542066, -0.18902677)
+collision_layer = 8
 
-[node name="Marker" parent="." index="1" unique_id=1879724888]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7636171, -0.39847636)
-
-[node name="MeshInstance3D" parent="Marker" index="0" unique_id=2102503704]
-mesh = SubResource("BoxMesh_ex8wu")
-
-[node name="CollisionShape3D" parent="Marker" index="1" unique_id=759677535]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Marker" unique_id=759677535]
 shape = SubResource("SphereShape3D_luaeo")
 
-[node name="CollisionShape3D" parent="." index="2" unique_id=2087258195]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2087258195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0145995915)
 shape = SubResource("BoxShape3D_pv08a")
+
+[node name="demon_statue" parent="." unique_id=1070395088 instance=ExtResource("2_ex8wu")]
+transform = Transform3D(-0.64721364, 0, -0.47022817, 0, 0.8, 0, 0.47022817, 0, -0.64721364, 2.68827, -1.0358733, 0.20745945)

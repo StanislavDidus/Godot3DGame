@@ -1,8 +1,11 @@
 [gd_resource type="Resource" script_class="item_data" format=3 uid="uid://0dol7us8630k"]
 
+[ext_resource type="PackedScene" uid="uid://c2m86yy7b1uln" path="res://scenes/demon_head.tscn" id="1_l20rb"]
 [ext_resource type="Script" uid="uid://cabhd2pny84yq" path="res://scenes/item_data.gd" id="1_wpfv5"]
 
 [resource]
 script = ExtResource("1_wpfv5")
 item_name = "statue_head"
+model = ExtResource("1_l20rb")
+model_scale = Vector3(2, 2, 2)
 metadata/_custom_type_script = "uid://cabhd2pny84yq"

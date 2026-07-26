@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cefkpuopcmed3"]
+
+[ext_resource type="FontFile" uid="uid://bb0y0hpx8v1wg" path="res://assets/fonts/Main.otf" id="1_mqjok"]
+
+[node name="ending" type="Control" unique_id=299958695]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=575281824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7372549)
+
+[node name="Label" type="Label" parent="." unique_id=979870342]
+layout_mode = 0
+offset_right = 316.0
+offset_bottom = 237.0
+theme_override_colors/font_color = Color(0.7058824, 0.7294118, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("1_mqjok")
+theme_override_font_sizes/font_size = 16
+text = "Thank you for playing our game!
+This game jam has proven to be quite hard for us this time. But we hope that despite everything you had a good time.
+Please leave feedback on the itch page.
+<3"
+autowrap_mode = 2

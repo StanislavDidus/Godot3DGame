@@ -18,12 +18,7 @@ var is_active = true
 
 
 func randomize():
-	if positions.is_empty(): return
-	var pos = positions[randi() % positions.size()]
-	
-	position = pos.position
-	position.y += $MeshInstance3D.get_aabb().size.y * 0.5
-	rotation = pos.rotation
+	pass	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,7 +55,7 @@ func update():
 				is_active = false
 				clock_opened.emit(clock_name)
 				
-				# Move clock away
+				
 				var tween = create_tween()
 				tween.tween_property(self, "position", position + Vector3(-1.3, 0, 0), 3.5)
 	
