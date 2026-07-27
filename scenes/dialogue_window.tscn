@@ -8,6 +8,10 @@ font = ExtResource("1_b1c2b")
 font_size = 10
 font_color = Color(0.8666667, 0.827451, 0.12941177, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_tdpx6"]
+font = ExtResource("1_b1c2b")
+font_size = 7
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=559175696]
 scale = Vector2(1, 1.0015113)
 transform = Transform2D(1, 0, -0.055, 1, 0, 0)
@@ -42,4 +46,23 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(1, 1.6789732)
 label_settings = SubResource("LabelSettings_oxmgc")
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="." unique_id=98141293]
+custom_maximum_size = Vector2(-1, 94.92)
+propagate_maximum_size = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 115.76999
+offset_top = -26.0
+offset_right = 426.16992
+offset_bottom = 68.91998
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 1.6789732)
+text = "Z to skip"
+label_settings = SubResource("LabelSettings_tdpx6")
 autowrap_mode = 2

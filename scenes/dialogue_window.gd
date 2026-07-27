@@ -32,6 +32,7 @@ func _process(delta: float) -> void:
 	var active_message = messages[0]
 	
 	$ColorRect.show()
+	$Label2.show()
 	$Label.text = active_message.text
 	$Label.visible_characters = timer / speed
 	
@@ -39,11 +40,13 @@ func _process(delta: float) -> void:
 		timer = 0.0
 		$Label.text = ""
 		$ColorRect.hide()
+		$Label2.hide()
 		messages.remove_at(0)
 	
 	if Input.is_action_just_pressed("close_dialogue"):
-		messages.clear()
 		timer = 0.0
 		$Label.text = ""
 		$ColorRect.hide()
+		$Label2.hide()
+		messages.remove_at(0)
 	

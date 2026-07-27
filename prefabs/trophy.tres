@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="item_data" format=3 uid="uid://b4gpxgwx7bmmn"]
 
 [ext_resource type="Script" uid="uid://cabhd2pny84yq" path="res://scenes/item_data.gd" id="1_3adoj"]
+[ext_resource type="PackedScene" uid="uid://pydtp6ftdaj5" path="res://scenes/trophy_2.tscn" id="1_ucfkn"]
 
 [resource]
 script = ExtResource("1_3adoj")
 item_name = "trophy"
+model = ExtResource("1_ucfkn")
 randomize_pos = false
 metadata/_custom_type_script = "uid://cabhd2pny84yq"

@@ -1,9 +1,12 @@
 [gd_resource type="Resource" script_class="item_data" format=3 uid="uid://dmaq8m6hu4ot"]
 
 [ext_resource type="Script" uid="uid://cabhd2pny84yq" path="res://scenes/item_data.gd" id="1_c3ggw"]
+[ext_resource type="PackedScene" uid="uid://bjstqbj65yqjc" path="res://assets/models/ring.glb" id="1_lvea0"]
 
 [resource]
 script = ExtResource("1_c3ggw")
 item_name = "ring"
+model = ExtResource("1_lvea0")
+model_scale = Vector3(0.6, 0.6, 0.6)
 randomize_pos = false
 metadata/_custom_type_script = "uid://cabhd2pny84yq"

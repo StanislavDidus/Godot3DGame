@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="item_data" format=3 uid="uid://btthk6dk3662y"]
 
 [ext_resource type="Script" uid="uid://cabhd2pny84yq" path="res://scenes/item_data.gd" id="1_goq6v"]
+[ext_resource type="PackedScene" uid="uid://bopqj3ufo5co1" path="res://assets/models/laptop.glb" id="1_sj58m"]
 
 [resource]
 script = ExtResource("1_goq6v")
 item_name = "laptop"
+model = ExtResource("1_sj58m")
 randomize_pos = false
 metadata/_custom_type_script = "uid://cabhd2pny84yq"

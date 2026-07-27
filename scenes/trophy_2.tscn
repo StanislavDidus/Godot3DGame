@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://pydtp6ftdaj5"]
+
+[ext_resource type="PackedScene" uid="uid://pdk36mohd8i5" path="res://assets/models/trophy.glb" id="1_y1gkm"]
+
+[node name="trophy2" unique_id=1518069636 instance=ExtResource("1_y1gkm")]
+
+[node name="trophy" parent="." index="0" unique_id=674336760]
+transform = Transform3D(0.10948108, 1.30903395e-08, -0.010672025, -0.010672025, -4.66489e-10, -0.10948108, -1.3073845e-08, 0.11, 8.0571555e-10, 0, 0, 0)

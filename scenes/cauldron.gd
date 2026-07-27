@@ -12,7 +12,7 @@ var is_active = true
 @export var post_ring_message3: String
 
 var hints: Array[String] = [
-	"I think you could use ultraviolet torch to light so area.", "It seems like the statue lacks the head.", "You need to turn on the projector by finding its 3 peaces."
+	"I think you could use the ultraviolet torch to light the area.", "It seems like the statue lacks the head.", "You need to turn on the projector by finding its 3 peaces.", "The code to the lock is somewhere in the room"
 ]
 
 signal finish_game

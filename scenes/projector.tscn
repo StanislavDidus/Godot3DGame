@@ -11,7 +11,7 @@ size = Vector3(1, 1.5864258, 1)
 size = Vector3(0.7, 0.6, 0.6)
 
 [node name="projector" type="StaticBody3D" unique_id=1584196817 node_paths=PackedStringArray("numbers") groups=["interactable", "objects"]]
-collision_layer = 4
+collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_0gms5")
 numbers = [NodePath("Number0"), NodePath("Number1"), NodePath("Number2"), NodePath("Number3"), NodePath("Number4"), NodePath("Number5")]

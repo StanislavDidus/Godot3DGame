@@ -77,6 +77,8 @@ func init(): # Randomize function
 	laptop.is_active = false
 	laptop.freeze = true
 	
+	laptop_lable.show()
+	
 	projector.is_active = false
 	
 	ring.is_active = false
@@ -86,6 +88,7 @@ func init(): # Randomize function
 	clock_hint.hide()
 
 func _ready() -> void:
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	init()
 	
 	
